@@ -5,11 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\EquipmentInventoryAPI.DataAccess\EquipmentInventoryAPI.DataAccess.csproj" />
+    <ProjectReference Include="..\EquipmentInventoryAPI.Library\EquipmentInventoryAPI.Library.csproj" />
   </ItemGroup>
 
 </Project>
