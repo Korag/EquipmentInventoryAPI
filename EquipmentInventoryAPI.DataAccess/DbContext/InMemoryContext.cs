@@ -37,6 +37,12 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                         City = "XYZ",
                         Address = "Polna 1"
                     }
+                },
+                Owner = new User()
+                {
+                    Id = Guid.Parse("c579968b-4e44-40ac-a948-2abe3aefc224"),
+                    FirstName = "Test",
+                    LastName = "User"
                 }
             });
             devicesEntities.Add(new Notebook()
@@ -61,6 +67,12 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                         City = "NYC",
                         Address = "Street A/20"
                     }
+                },
+                Owner = new User()
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "User",
+                    LastName = "Second"
                 }
             });;
         }

@@ -3,7 +3,6 @@ using EquipmentInventoryAPI.DataAccess.Models;
 using EquipmentInventoryAPI.DataAccess.Repositories;
 using EquipmentInventoryAPI.Library.DataTransferObjects;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +34,7 @@ namespace EquipmentInventoryAPI.Controllers
             {
                 devicesDto[i].Model = _mapper.Map<ShowDeviceModelDto>(devices[i].Model);
                 devicesDto[i].Model.Manufacturer = _mapper.Map<ShowManufacturerDto>(devices[i].Model.Manufacturer);
+                devicesDto[i].Owner = _mapper.Map<ShowUserDto>(devices[i].Owner);
             }
 
             return Ok(devicesDto);
@@ -52,6 +52,7 @@ namespace EquipmentInventoryAPI.Controllers
             var deviceDto = _mapper.Map<ShowDeviceDto>(device);
             deviceDto.Model = _mapper.Map<ShowDeviceModelDto>(device.Model);
             deviceDto.Model.Manufacturer = _mapper.Map<ShowManufacturerDto>(device.Model.Manufacturer);
+            deviceDto.Owner = _mapper.Map<ShowUserDto>(device.Owner);
 
             return Ok(deviceDto);
         }
@@ -71,6 +72,8 @@ namespace EquipmentInventoryAPI.Controllers
 
             newDevice.Model.Manufacturer = _mapper.Map<Manufacturer>(device.Model.Manufacturer);
             newDevice.Model.Manufacturer.Id = Guid.NewGuid();
+
+            newDevice.Owner = _mapper.Map<User>(device.Owner);
 
             _deviceRepository.AddDevice(newDevice);
 
@@ -97,6 +100,7 @@ namespace EquipmentInventoryAPI.Controllers
                 var updatedDevice = _mapper.Map<IDevice>(device);
                 updatedDevice.Model = _mapper.Map<DeviceModel>(device.Model);
                 updatedDevice.Model.Manufacturer = _mapper.Map<Manufacturer>(device.Model.Manufacturer);
+                updatedDevice.Owner = _mapper.Map<User>(device.Owner);
 
                 _deviceRepository.UpdateDevice(updatedDevice);
             }
