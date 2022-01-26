@@ -32,7 +32,7 @@ namespace EquipmentInventoryAPI.Test
                                                        new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
 
             //Act
-            var result = assetController.GetDevices().Result;
+            var result = assetController.GetAssets().Result;
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
@@ -49,7 +49,7 @@ namespace EquipmentInventoryAPI.Test
                                                        new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
 
             //Act
-            var result = assetController.GetDevice(id).Result;
+            var result = assetController.GetAsset(id).Result;
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
@@ -74,7 +74,7 @@ namespace EquipmentInventoryAPI.Test
                                                       new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
 
             //Act
-            var result = assetController.PostDevice(assetDto).Result;
+            var result = assetController.PostAsset(assetDto).Result;
 
             //Assert
             var okResult = Assert.IsType<CreatedAtActionResult>(result.Result);
@@ -91,7 +91,7 @@ namespace EquipmentInventoryAPI.Test
                                                         new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
 
             //Act
-            var result = assetController.DeleteDevice(id).Result;
+            var result = assetController.DeleteAsset(id).Result;
 
             //Assert
             var noContentResult = Assert.IsType<NoContentResult>(result);
@@ -107,7 +107,7 @@ namespace EquipmentInventoryAPI.Test
             var id = Guid.NewGuid().ToString();
 
             //Act
-            var result = assetController.DeleteDevice(id).Result;
+            var result = assetController.DeleteAsset(id).Result;
 
             //Assert
             var notFoundResult = Assert.IsType<NotFoundResult>(result);
@@ -123,7 +123,7 @@ namespace EquipmentInventoryAPI.Test
             var idString = id.ToString();
 
             //Act
-            var result = assetController.UpdateDevice(idString, new UpdateAssetDto() { Id = id }).Result;
+            var result = assetController.UpdateAsset(idString, new UpdateAssetDto() { Id = id }).Result;
 
             //Assert
             var notFoundResult = Assert.IsType<NotFoundResult>(result);
@@ -139,7 +139,7 @@ namespace EquipmentInventoryAPI.Test
             var idString = Guid.NewGuid().ToString();
 
             //Act
-            var result = assetController.UpdateDevice(idString, new UpdateAssetDto() { Id = id }).Result;
+            var result = assetController.UpdateAsset(idString, new UpdateAssetDto() { Id = id }).Result;
 
             //Assert
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
@@ -154,7 +154,7 @@ namespace EquipmentInventoryAPI.Test
                                                         new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
 
             //Act
-            var result = assetController.GetDevicesByOwnerId(id).Result;
+            var result = assetController.GetAssetsByOwnerId(id).Result;
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);

@@ -19,8 +19,8 @@ namespace EquipmentInventoryAPI.Controllers
 
         private readonly IMapper _mapper;
 
-        public AssetController(IAssetRepository assetRepository, 
-                               IUserAssetsOwnershipRepository userOwnershipRepository, 
+        public AssetController(IAssetRepository assetRepository,
+                               IUserAssetsOwnershipRepository userOwnershipRepository,
                                IMapper mapper)
         {
             _assetRepository = assetRepository;
@@ -77,26 +77,7 @@ namespace EquipmentInventoryAPI.Controllers
             newAsset.Id = Guid.NewGuid();
 
             _assetRepository.AddAsset(newAsset);
-
-            foreach (var owner in newAsset.Owners)
-            {
-                var userAssetOwnership = _mapper.Map<UserAssetOwnership>(newAsset);
-                userAssetOwnership.AquireDate = DateTime.Now;
-                userAssetOwnership.DisposalDate = DateTime.MinValue;
-
-                var userOwnershipInfo = _userOwnershipRepository.GetUserAssetOwnershipById(owner);
-
-                if (userOwnershipInfo == null)
-                {
-                    userOwnershipInfo = new UserAssets();
-
-                    userOwnershipInfo.Id = Guid.NewGuid();
-                    userOwnershipInfo.OwnerId = owner;
-                }
-
-                userOwnershipInfo.Assets.Add(userAssetOwnership);
-                _userOwnershipRepository.AddUserAssetOwnership(userOwnershipInfo);
-            }
+            AddUserAssetOwnership(newAsset);
 
             var assetDto = _mapper.Map<ShowAssetDto>(newAsset);
 
@@ -133,21 +114,52 @@ namespace EquipmentInventoryAPI.Controllers
                 return NotFound();
 
             _assetRepository.RemoveAsset(asset);
+            RemoveUserAssetOwnership(asset);
 
+            return NoContent();
+        }
+
+        private void AddUserAssetOwnership(Asset asset)
+        {
             foreach (var owner in asset.Owners)
             {
-                //var userOwnerShipInfo = _userOwnershipRepository.GetUserAssetOwnershipById(owner);
+                var userAssetOwnership = _mapper.Map<UserAssetOwnership>(asset);
+                userAssetOwnership.AquireDate = DateTime.Now;
+                userAssetOwnership.DisposalDate = DateTime.MinValue;
 
-                //if (userOwnerShipInfo != null)
-                //{
-                //    if (userOwnerShipInfo.Assets.Select(x => x.Id).Contains(Guid.Parse(id)))
-                //    {
-                //        _userOwnershipRepository.
-                //    }
-                //}
+                var userOwnershipInfo = _userOwnershipRepository.GetUserAssetOwnershipById(owner);
+
+                if (userOwnershipInfo == null)
+                {
+                    userOwnershipInfo = new UserAssets();
+
+                    userOwnershipInfo.Id = Guid.NewGuid();
+                    userOwnershipInfo.OwnerId = owner;
+                }
+
+                userOwnershipInfo.Assets.Add(userAssetOwnership);
+                _userOwnershipRepository.AddUserAssetOwnership(userOwnershipInfo);
+            }
+        }
+
+        private void RemoveUserAssetOwnership(Asset asset)
+        {
+            foreach (var owner in asset.Owners)
+            {
+                var userOwnershipInfo = _userOwnershipRepository.GetUserAssetOwnershipById(owner);
+
+                if (userOwnershipInfo != null)
+                {
+                    var userAsset = userOwnershipInfo.Assets.Where(x => x.DeviceId == asset.Id).FirstOrDefault();
+
+                    if (userAsset != null)
+                    {
+                        userOwnershipInfo.Assets.Remove(userAsset);
+                        _userOwnershipRepository.UpdateUserAssetOwnership(userOwnershipInfo);
+                    }
+                }
 
                 //TODO:
-                //Remove Ownership
                 //UserController
                 //UserRepo
                 //GetUserDevicesOwnershipHistory
@@ -156,8 +168,6 @@ namespace EquipmentInventoryAPI.Controllers
 
                 //Add Angular simple GUI
             }
-
-            return NoContent();
         }
     }
 }

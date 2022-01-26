@@ -17,12 +17,12 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
 
         public void AddAsset(Asset asset)
         {
-            _context.devicesEntities.Add(device);
+            _context.devicesEntities.Add(asset);
         }
 
         public void RemoveAsset(Asset asset)
         {
-            _context.devicesEntities.Remove(device);
+            _context.devicesEntities.Remove(asset);
         }
 
         public ICollection<Asset> GetAssets()
@@ -42,7 +42,7 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
 
         public void UpdateAsset(Asset asset)
         {
-            var index = _context.devicesEntities.ToList().FindIndex(x => x.Id == device.Id);
+            var index = _context.devicesEntities.ToList().FindIndex(x => x.Id == asset.Id);
             _context.devicesEntities[index] = asset;
         }
 
