@@ -1,4 +1,5 @@
 ﻿using EquipmentInventoryAPI.DataAccess.Models;
+using System;
 using System.Collections.Generic;
 
 namespace EquipmentInventoryAPI.DataAccess.DbContext
@@ -16,7 +17,7 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
         {
             devicesEntities.Add(new Notebook()
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 SerialNumber = "ZXCZVGASG218",
                 Name = "Test notebook",
                 PresentPrice = 3200,
@@ -24,11 +25,11 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                 PurchaseDate = System.DateTime.UtcNow,
                 Model = new DeviceModel()
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid(),
                     ModelNumber = "AXZCCASDAD123",
                     Manufacturer = new Manufacturer()
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid(),
                         Name = "Comp123",
                         ContactNumber = "123456789",
                         EmailAddress = "comp@comp123.com",
@@ -40,7 +41,7 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
             });
             devicesEntities.Add(new Notebook()
             {
-                Id = 2,
+                Id = Guid.NewGuid(),
                 SerialNumber = "ZXCZVGAZG218",
                 Name = "Test notebook 2",
                 PresentPrice = 4200,
@@ -48,11 +49,11 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                 PurchaseDate = System.DateTime.UtcNow,
                 Model = new DeviceModel()
                 {
-                    Id = 2,
+                    Id = Guid.NewGuid(),
                     ModelNumber = "AXTTTASDAD123",
                     Manufacturer = new Manufacturer()
                     {
-                        Id = 2,
+                        Id = Guid.NewGuid(),
                         Name = "Asistek",
                         ContactNumber = "768593056",
                         EmailAddress = "contact@asistek.com",
@@ -61,7 +62,7 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                         Address = "Street A/20"
                     }
                 }
-            });
+            });;
         }
     }
 }

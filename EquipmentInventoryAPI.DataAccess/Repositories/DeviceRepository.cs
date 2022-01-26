@@ -1,5 +1,6 @@
 ﻿using EquipmentInventoryAPI.DataAccess.DbContext;
 using EquipmentInventoryAPI.DataAccess.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,7 +30,7 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
             return _context.devicesEntities;
         }
 
-        public IDevice GetDeviceById(int id)
+        public IDevice GetDeviceById(Guid id)
         {
             return _context.devicesEntities.FirstOrDefault(x => x.Id == id);
         }
@@ -40,7 +41,7 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
             _context.devicesEntities[index] = device;
         }
 
-        public bool CheckIfDeviceExist(int id)
+        public bool CheckIfDeviceExist(Guid id)
         {
             if (_context.devicesEntities.FirstOrDefault(x => x.Id == id) == null)
             {

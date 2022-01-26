@@ -8,7 +8,7 @@ namespace EquipmentInventoryAPI.DataAccess.Models
 {
     public class DeviceModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string ModelNumber { get; set; }
 
         public Manufacturer Manufacturer { get; set; }

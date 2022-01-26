@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EquipmentInventoryAPI.DataAccess.Models
 {
-    public abstract class IDevice
+    public class IDevice
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string SerialNumber { get; set; }
 
         public string Name { get; set; }
