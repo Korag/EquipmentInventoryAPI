@@ -73,7 +73,7 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                 Owners = new List<User>()
                 {
                     new User(){
-                         Id = Guid.NewGuid(),
+                         Id = Guid.Parse("c979968b-4e44-40ac-a948-2abe3aefc224"),
                          FirstName = "User",
                          LastName = "Second"
                 }}
@@ -107,8 +107,13 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                          Id = Guid.Parse("c579968b-4e44-40ac-a948-2abe3aefc224"),
                          FirstName = "Test",
                          LastName = "User"
-                }}
-            }); ;
+                },
+                new User(){
+                         Id = Guid.Parse("c979968b-4e44-40ac-a948-2abe3aefc224"),
+                         FirstName = "User",
+                         LastName = "Second" } 
+                }
+            });
         }
     }
 }

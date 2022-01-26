@@ -26,6 +26,7 @@ namespace EquipmentInventoryAPI.Test
         [Fact]
         public void GetDevices_ReturnInMemoryDbContent()
         {
+            //Arrange
             var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
 
             //Act
@@ -41,6 +42,7 @@ namespace EquipmentInventoryAPI.Test
         [InlineData("c579968b-4e44-40ac-a948-2abe3aefc054")]
         public void GetDeviceById_ReturnDeviceIfIdIsValid(string id)
         {
+            //Arrange
             var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
 
             //Act
@@ -55,6 +57,7 @@ namespace EquipmentInventoryAPI.Test
         [Fact]
         public void AddDevice_ReturnCreatedDevice()
         {
+            //Arrange
             var addDeviceDto = new AddDeviceDto()
             {
                 SerialNumber = "ABVC",
@@ -94,6 +97,7 @@ namespace EquipmentInventoryAPI.Test
         [InlineData("c579968b-4e44-40ac-a948-2abe3aefc054")]
         public void DeleteDevice_IfDeviceExist_ReturnNoContent(string id)
         {
+            //Arrange
             var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
 
             //Act
@@ -106,6 +110,7 @@ namespace EquipmentInventoryAPI.Test
         [Fact]
         public void DeleteDevice_IfDeviceNotExist_ReturnNotFound()
         {
+            //Arrange
             var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
             var id = Guid.NewGuid().ToString();
 
@@ -119,6 +124,7 @@ namespace EquipmentInventoryAPI.Test
         [Fact]
         public void UpdateDevice_IfDeviceNotExistButIdsAreEqual_ReturnNotFound()
         {
+            //Arrange
             var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
             var id = Guid.NewGuid();
             var idString = id.ToString();
@@ -128,6 +134,37 @@ namespace EquipmentInventoryAPI.Test
 
             //Assert
             var notFoundResult = Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void UpdateDevice_IfDeviceIdsAreDifferent_ReturnBadRequest()
+        {
+            //Arrange
+            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
+            var id = Guid.NewGuid();
+            var idString = Guid.NewGuid().ToString();
+
+            //Act
+            var result = deviceController.UpdateDevice(idString, new UpdateDeviceDto() { Id = id }).Result;
+
+            //Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+        }
+
+        [Theory]
+        [InlineData("c579968b-4e44-40ac-a948-2abe3aefc224")]
+        public void GetDevicesByUserId_ReturnDeviceIfIdIsValid(string id)
+        {
+            //Arrange
+            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
+
+            //Act
+            var result = deviceController.GetDevicesByOwnerId(id).Result;
+
+            //Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            Assert.IsType<List<ShowDeviceDto>>(okResult.Value);
+            Assert.NotNull(okResult.Value);
         }
     }
 }
