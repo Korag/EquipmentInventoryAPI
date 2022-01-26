@@ -15,13 +15,11 @@ namespace EquipmentInventoryAPI.Controllers
     [Route("api/[controller]")]
     public class DeviceController : ControllerBase
     {
-        private readonly ILogger<DeviceController> _logger;
         private readonly IDeviceRepository _deviceRepository;
         private readonly IMapper _mapper;
 
-        public DeviceController(ILogger<DeviceController> logger, IDeviceRepository deviceRepository, IMapper mapper)
+        public DeviceController(IDeviceRepository deviceRepository, IMapper mapper)
         {
-            _logger = logger;
             _deviceRepository = deviceRepository;
             _mapper = mapper;
         }
@@ -39,7 +37,7 @@ namespace EquipmentInventoryAPI.Controllers
                 devicesDto[i].Model.Manufacturer = _mapper.Map<ShowManufacturerDto>(devices[i].Model.Manufacturer);
             }
 
-            return Ok(devices);
+            return Ok(devicesDto);
         }
 
         // GET: api/Device/5
@@ -55,12 +53,12 @@ namespace EquipmentInventoryAPI.Controllers
             deviceDto.Model = _mapper.Map<ShowDeviceModelDto>(device.Model);
             deviceDto.Model.Manufacturer = _mapper.Map<ShowManufacturerDto>(device.Model.Manufacturer);
 
-            return Ok(device);
+            return Ok(deviceDto);
         }
 
         // POST: api/Device
         [HttpPost]
-        public async Task<ActionResult<AddDeviceDto>> PostDevice(AddDeviceDto device)
+        public async Task<ActionResult<ShowDeviceDto>> PostDevice(AddDeviceDto device)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -80,7 +78,7 @@ namespace EquipmentInventoryAPI.Controllers
             deviceDto.Model = _mapper.Map<ShowDeviceModelDto>(newDevice.Model);
             deviceDto.Model.Manufacturer = _mapper.Map<ShowManufacturerDto>(newDevice.Model.Manufacturer);
 
-            return CreatedAtAction("GetDevice", new { id = newDevice.Id }, newDevice);
+            return CreatedAtAction("GetDevice", new { id = deviceDto.Id }, deviceDto);
         }
 
         // PUT: api/Device

@@ -17,7 +17,7 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
         {
             devicesEntities.Add(new Notebook()
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.Parse("c579968b-4e44-40ac-a948-2abe3aefc054"),
                 SerialNumber = "ZXCZVGASG218",
                 Name = "Test notebook",
                 PresentPrice = 3200,

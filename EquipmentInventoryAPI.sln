@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventoryAPI.Libra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventoryAPI.DataAccess", "EquipmentInventoryAPI.DataAccess\EquipmentInventoryAPI.DataAccess.csproj", "{D05D4482-5D7E-4B03-B763-4D263E6B21B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventoryAPI.Test", "EquipmentInventoryAPI.Test\EquipmentInventoryAPI.Test.csproj", "{53D69B9D-4250-4197-AA1F-45770036626B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D05D4482-5D7E-4B03-B763-4D263E6B21B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D05D4482-5D7E-4B03-B763-4D263E6B21B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D05D4482-5D7E-4B03-B763-4D263E6B21B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D69B9D-4250-4197-AA1F-45770036626B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D69B9D-4250-4197-AA1F-45770036626B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D69B9D-4250-4197-AA1F-45770036626B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D69B9D-4250-4197-AA1F-45770036626B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
