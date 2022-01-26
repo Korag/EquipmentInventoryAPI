@@ -17,7 +17,13 @@ namespace EquipmentInventoryAPI.Library.Profiles
             CreateMap<User, ShowUserDto>();
             CreateMap<UpdateUserDto, User>();
 
-            CreateMap<Asset, UserAssetOwnership>();
+            CreateMap<UserAssetsOwnership, ShowUserAssetsOwnershipDto>();
+            CreateMap<UserAsset, ShowUserAssetDto>();
+            CreateMap<AddUserAssetDto, UserAsset>();
+            CreateMap<AddUserAssetOwnershipDto, UserAssetsOwnership>();
+
+            CreateMap<UpdateUserAssetsOwnershipDto, UserAssetsOwnership>();
+            CreateMap<UpdateUserAssetDto, UserAsset>();
         }
     }
 }
