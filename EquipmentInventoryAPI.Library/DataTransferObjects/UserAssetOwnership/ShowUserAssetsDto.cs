@@ -2,10 +2,10 @@
 
 namespace EquipmentInventoryAPI.Library.DataTransferObjects
 {
-    public class ShowUserDeviceDto
+    public class ShowUserAssetsDto
     {
         public Guid UserId { get; set; }
 
-        public DeviceOwnershipDto Devices { get; set; }
+        public ShowUserAssetOwnershipDto Devices { get; set; }
     }
 }

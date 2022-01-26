@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EquipmentInventoryAPI.DataAccess.Models
 {
-    public class IDevice
+    public class Asset
     {
         public Guid Id { get; set; }
         public string SerialNumber { get; set; }
@@ -12,13 +12,13 @@ namespace EquipmentInventoryAPI.DataAccess.Models
         public decimal PurchasePrice { get; set; }
         public decimal PresentPrice { get; set; }
 
-        public DateTime PurchaseDate { get; set; }
+        public DateTimeOffset PurchaseDate { get; set; }
 
-        public DeviceModel Model { get; set; }
+        public AssetType Type { get; set; }
 
-        public ICollection<User> Owners { get; set; }
+        public ICollection<Guid> Owners { get; set; }
 
-        public IDevice()
+        public Asset()
         {
 
         }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using EquipmentInventoryAPI.DataAccess.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EquipmentInventoryAPI.Library.DataTransferObjects
 {
-    public class AddDeviceDto
+    public class AddAssetDto
     {
         [Required]
         public string SerialNumber { get; set; }
@@ -17,10 +18,11 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
         public decimal PresentPrice { get; set; }
 
         [Required]
-        public DateTime PurchaseDate { get; set; }
+        public AssetType Type { get; set; }
 
-        public AddDeviceModelDto Model { get; set; }
+        [Required]
+        public DateTimeOffset PurchaseDate { get; set; }
 
-        public ICollection<AddUserDto> Owners { get; set; }
+        public ICollection<Guid> Owners { get; set; }
     }
 }

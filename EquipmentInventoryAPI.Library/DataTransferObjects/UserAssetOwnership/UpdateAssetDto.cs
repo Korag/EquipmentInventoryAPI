@@ -1,10 +1,11 @@
-﻿using System;
+﻿using EquipmentInventoryAPI.DataAccess.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EquipmentInventoryAPI.Library.DataTransferObjects
 {
-    public class UpdateDeviceDto
+    public class UpdateAssetDto
     {
         [Required]
         public Guid Id { get; set; }
@@ -20,13 +21,14 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
         public decimal PresentPrice { get; set; }
 
         [Required]
+        public AssetType Type { get; set; }
+
+        [Required]
         public DateTime PurchaseDate { get; set; }
 
-        public UpdateDeviceModelDto Model { get; set; }
+        public ICollection<Guid> Owners { get; set; }
 
-        public ICollection<UpdateUserDto> Owners { get; set; }
-
-        public UpdateDeviceDto()
+        public UpdateAssetDto()
         {
 
         }

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace EquipmentInventoryAPI.DataAccess.Models
 {
-    public class UserOwnershipInfo
+    public class UserAssets
     {
         public Guid Id { get; set; }
         public Guid OwnerId { get; set; }
 
-        public ICollection<Guid> Devices { get; set; }
+        public ICollection<UserAssetOwnership> Assets { get; set; }
 
-        public UserOwnershipInfo()
+        public UserAssets()
         {
-            this.Devices = new List<Guid>();
+            this.Assets = new List<UserAssetOwnership>();
         }
     }
 }

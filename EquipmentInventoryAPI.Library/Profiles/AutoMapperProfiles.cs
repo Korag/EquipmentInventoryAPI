@@ -8,12 +8,12 @@ namespace EquipmentInventoryAPI.Library.Profiles
     {
         public AutoMapperProfiles()
         {
-            CreateMap<IDevice, ShowDeviceDto>();
+            CreateMap<Asset, ShowAssetDto>();
             CreateMap<Manufacturer, ShowManufacturerDto>();
             CreateMap<DeviceModel, ShowDeviceModelDto>();
 
-            CreateMap<IDevice, AddDeviceDto>();
-            CreateMap<AddDeviceDto, IDevice>();
+            CreateMap<Asset, AddAssetDto>();
+            CreateMap<AddAssetDto, Asset>();
 
             CreateMap<Manufacturer, AddManufacturerDto>();
             CreateMap<DeviceModel, AddDeviceModelDto>();
@@ -21,7 +21,7 @@ namespace EquipmentInventoryAPI.Library.Profiles
             CreateMap<AddManufacturerDto, Manufacturer>();
             CreateMap<AddDeviceModelDto, DeviceModel>();
 
-            CreateMap<UpdateDeviceDto, IDevice>();
+            CreateMap<UpdateAssetDto, Asset>();
             CreateMap<UpdateManufacturerDto, Manufacturer>();
             CreateMap<UpdateDeviceModelDto, DeviceModel>();
 
@@ -29,7 +29,7 @@ namespace EquipmentInventoryAPI.Library.Profiles
             CreateMap<User, ShowUserDto>();
             CreateMap<UpdateUserDto, User>();
 
-            CreateMap<IDevice, UserDeviceOwnership>();
+            CreateMap<Asset, UserAssetOwnership>();
         }
     }
 }
