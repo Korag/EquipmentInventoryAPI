@@ -6,41 +6,41 @@ using System.Linq;
 
 namespace EquipmentInventoryAPI.DataAccess.Repositories
 {
-    public class DeviceRepository : IDeviceRepository
+    public class AssetRepository : IAssetRepository
     {
         private InMemoryContext _context { get; set; }
 
-        public DeviceRepository(InMemoryContext context)
+        public AssetRepository(InMemoryContext context)
         {
             _context = context;
         }
 
-        public void AddDevice(IDevice device)
+        public void AddDevice(Asset device)
         {
             _context.devicesEntities.Add(device);
         }
 
-        public void RemoveDevice(IDevice device)
+        public void RemoveDevice(Asset device)
         {
             _context.devicesEntities.Remove(device);
         }
 
-        public ICollection<IDevice> GetDevices()
+        public ICollection<Asset> GetDevices()
         {
             return _context.devicesEntities;
         }
 
-        public IDevice GetDeviceById(Guid id)
+        public Asset GetDeviceById(Guid id)
         {
             return _context.devicesEntities.FirstOrDefault(x => x.Id == id);
         }
 
-        public ICollection<IDevice> GetDevicesByUserId(Guid id)
+        public ICollection<Asset> GetDevicesByUserId(Guid id)
         {
-            return _context.devicesEntities.Where(x => x.Owners.Select(x => x.Id).Contains(id)).ToList();
+            return _context.devicesEntities.Where(x => x.Owners.Contains(id)).ToList();
         }
 
-        public void UpdateDevice(IDevice device)
+        public void UpdateDevice(Asset device)
         {
             var index = _context.devicesEntities.ToList().FindIndex(x => x.Id == device.Id);
             _context.devicesEntities[index] = device;

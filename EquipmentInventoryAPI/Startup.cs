@@ -41,8 +41,8 @@ namespace EquipmentInventoryAPI
             });
 
             services.AddSingleton<InMemoryContext, InMemoryContext>();
-            services.AddTransient<IDeviceRepository, DeviceRepository>();
-            services.AddTransient<IUserOwnershipInfoRepository, UserOwnershipInfoRepository>();
+            services.AddTransient<IAssetRepository, AssetRepository>();
+            services.AddTransient<IUserAssetsOwnershipRepository, UserAssetsOwnershipRepository>();
 
             AppDomain.CurrentDomain.Load("EquipmentInventoryAPI.Library");
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
