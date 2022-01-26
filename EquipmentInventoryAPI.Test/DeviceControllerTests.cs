@@ -27,7 +27,7 @@ namespace EquipmentInventoryAPI.Test
         public void GetDevices_ReturnInMemoryDbContent()
         {
             //Arrange
-            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
+            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper, new UserOwnershipInfoRepository(new DataAccess.DbContext.InMemoryContext()));
 
             //Act
             var result = deviceController.GetDevices().Result;
@@ -43,7 +43,7 @@ namespace EquipmentInventoryAPI.Test
         public void GetDeviceById_ReturnDeviceIfIdIsValid(string id)
         {
             //Arrange
-            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
+            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper, new UserOwnershipInfoRepository(new DataAccess.DbContext.InMemoryContext()));
 
             //Act
             var result = deviceController.GetDevice(id).Result;
@@ -82,7 +82,7 @@ namespace EquipmentInventoryAPI.Test
                 Address = "Polna 1"
             };
 
-            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
+            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper, new UserOwnershipInfoRepository(new DataAccess.DbContext.InMemoryContext()));
 
             //Act
             var result = deviceController.PostDevice(addDeviceDto).Result;
@@ -98,7 +98,7 @@ namespace EquipmentInventoryAPI.Test
         public void DeleteDevice_IfDeviceExist_ReturnNoContent(string id)
         {
             //Arrange
-            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
+            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper, new UserOwnershipInfoRepository(new DataAccess.DbContext.InMemoryContext()));
 
             //Act
             var result = deviceController.DeleteDevice(id).Result;
@@ -111,7 +111,7 @@ namespace EquipmentInventoryAPI.Test
         public void DeleteDevice_IfDeviceNotExist_ReturnNotFound()
         {
             //Arrange
-            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
+            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper, new UserOwnershipInfoRepository(new DataAccess.DbContext.InMemoryContext()));
             var id = Guid.NewGuid().ToString();
 
             //Act
@@ -125,7 +125,7 @@ namespace EquipmentInventoryAPI.Test
         public void UpdateDevice_IfDeviceNotExistButIdsAreEqual_ReturnNotFound()
         {
             //Arrange
-            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
+            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper, new UserOwnershipInfoRepository(new DataAccess.DbContext.InMemoryContext()));
             var id = Guid.NewGuid();
             var idString = id.ToString();
 
@@ -140,7 +140,7 @@ namespace EquipmentInventoryAPI.Test
         public void UpdateDevice_IfDeviceIdsAreDifferent_ReturnBadRequest()
         {
             //Arrange
-            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
+            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper, new UserOwnershipInfoRepository(new DataAccess.DbContext.InMemoryContext()));
             var id = Guid.NewGuid();
             var idString = Guid.NewGuid().ToString();
 
@@ -156,7 +156,7 @@ namespace EquipmentInventoryAPI.Test
         public void GetDevicesByUserId_ReturnDeviceIfIdIsValid(string id)
         {
             //Arrange
-            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper);
+            var deviceController = new DeviceController(new DeviceRepository(new DataAccess.DbContext.InMemoryContext()), mapper, new UserOwnershipInfoRepository(new DataAccess.DbContext.InMemoryContext()));
 
             //Act
             var result = deviceController.GetDevicesByOwnerId(id).Result;

@@ -2,17 +2,11 @@ using EquipmentInventoryAPI.DataAccess.DbContext;
 using EquipmentInventoryAPI.DataAccess.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EquipmentInventoryAPI
 {
@@ -48,6 +42,7 @@ namespace EquipmentInventoryAPI
 
             services.AddSingleton<InMemoryContext, InMemoryContext>();
             services.AddTransient<IDeviceRepository, DeviceRepository>();
+            services.AddTransient<IUserOwnershipInfoRepository, UserOwnershipInfoRepository>();
 
             AppDomain.CurrentDomain.Load("EquipmentInventoryAPI.Library");
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

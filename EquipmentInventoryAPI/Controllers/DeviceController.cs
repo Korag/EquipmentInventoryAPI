@@ -15,12 +15,15 @@ namespace EquipmentInventoryAPI.Controllers
     public class DeviceController : ControllerBase
     {
         private readonly IDeviceRepository _deviceRepository;
+        private readonly IUserOwnershipInfoRepository _userOwnershipRepository;
+
         private readonly IMapper _mapper;
 
-        public DeviceController(IDeviceRepository deviceRepository, IMapper mapper)
+        public DeviceController(IDeviceRepository deviceRepository, IMapper mapper, IUserOwnershipInfoRepository userOwnershipRepository)
         {
             _deviceRepository = deviceRepository;
             _mapper = mapper;
+            _userOwnershipRepository = userOwnershipRepository;
         }
 
         // GET: api/Device
@@ -78,6 +81,15 @@ namespace EquipmentInventoryAPI.Controllers
             return Ok(devicesDto);
         }
 
+        //// GET: api/Device/History/User/5
+        //[HttpGet("User/{id}")]
+        //public async Task<ActionResult<ICollection<ShowUserDeviceDto>>> GetDevicesByOwnerId(string id)
+        //{
+
+
+        //}
+
+
         // POST: api/Device
         [HttpPost]
         public async Task<ActionResult<ShowDeviceDto>> PostDevice(AddDeviceDto device)
@@ -98,11 +110,36 @@ namespace EquipmentInventoryAPI.Controllers
 
             _deviceRepository.AddDevice(newDevice);
 
+            foreach (var owner in newDevice.Owners)
+            {
+                var userDeviceOwnership = _mapper.Map<UserDeviceOwnership>(newDevice);
+                userDeviceOwnership.Model = newDevice.Model;
+                userDeviceOwnership.Model.Manufacturer = newDevice.Model.Manufacturer;
+                userDeviceOwnership.AquireDate = DateTime.Now;
+                userDeviceOwnership.DisposalDate = DateTime.MinValue;
+
+                var userOwnerShipInfo = _userOwnershipRepository.GetUserOwnershipInfoByUserId(owner.Id);
+
+                if (userOwnerShipInfo == null)
+                {
+                    userOwnerShipInfo = new UserOwnershipInfo();
+
+                    userOwnerShipInfo.Id = Guid.NewGuid();
+                    userOwnerShipInfo.Owner = _mapper.Map<User>(owner);
+                }
+
+                userOwnerShipInfo.Devices.Add(userDeviceOwnership);
+                _userOwnershipRepository.AddUserDeviceOwnership(userOwnerShipInfo);
+            }
+
             var deviceDto = _mapper.Map<ShowDeviceDto>(newDevice);
             deviceDto.Model = _mapper.Map<ShowDeviceModelDto>(newDevice.Model);
             deviceDto.Model.Manufacturer = _mapper.Map<ShowManufacturerDto>(newDevice.Model.Manufacturer);
 
-            return CreatedAtAction("GetDevice", new { id = deviceDto.Id }, deviceDto);
+            return CreatedAtAction("GetDevice", new
+            {
+                id = deviceDto.Id
+            }, deviceDto);
         }
 
         // PUT: api/Device
@@ -139,6 +176,20 @@ namespace EquipmentInventoryAPI.Controllers
                 return NotFound();
 
             _deviceRepository.RemoveDevice(device);
+
+            foreach (var owner in device.Owners)
+            {
+                var userOwnerShipInfo = _userOwnershipRepository.GetUserOwnershipInfoByUserId(owner.Id);
+
+                if (userOwnerShipInfo != null)
+                {
+                    if (userOwnerShipInfo.Devices.Select(x => x.Id).Contains(Guid.Parse(id)))
+                    {
+                        _userOwnershipRepository.
+                    }
+                }
+            }
+
             return NoContent();
         }
     }

@@ -109,10 +109,10 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                          FirstName = "Test",
                          LastName = "User"
                 },
-                new User(){
+                    new User(){
                          Id = Guid.Parse("c979968b-4e44-40ac-a948-2abe3aefc224"),
                          FirstName = "User",
-                         LastName = "Second" } 
+                         LastName = "Second" }
                 }
             });
         }

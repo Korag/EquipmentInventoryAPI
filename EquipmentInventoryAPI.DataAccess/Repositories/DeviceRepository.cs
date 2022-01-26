@@ -48,14 +48,7 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
 
         public bool CheckIfDeviceExist(Guid id)
         {
-            if (_context.devicesEntities.FirstOrDefault(x => x.Id == id) == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return _context.devicesEntities.FirstOrDefault(x => x.Id == id) == null ? true : false;
         }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using EquipmentInventoryAPI.DataAccess.Models;
 using EquipmentInventoryAPI.Library.DataTransferObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EquipmentInventoryAPI.Library.Profiles
 {
@@ -33,6 +28,8 @@ namespace EquipmentInventoryAPI.Library.Profiles
             CreateMap<AddUserDto, User>();
             CreateMap<User, ShowUserDto>();
             CreateMap<UpdateUserDto, User>();
+
+            CreateMap<IDevice, UserDeviceOwnership>();
         }
     }
 }

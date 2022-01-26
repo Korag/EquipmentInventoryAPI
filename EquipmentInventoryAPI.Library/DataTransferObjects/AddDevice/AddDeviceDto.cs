@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EquipmentInventoryAPI.Library.DataTransferObjects
 {
@@ -14,7 +11,7 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
 
         [Required]
         public string Name { get; set; }
-        
+
         [Required]
         public decimal PurchasePrice { get; set; }
         public decimal PresentPrice { get; set; }
