@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EquipmentInventoryAPI.Library.DataTransferObjects
 {
-    public class ShowDeviceDto
+    public class AddDeviceDto
     {
-        public ShowDeviceDto()
-        {
-
-        }
-
-        public Guid Id { get; set; }
+        [Required]
         public string SerialNumber { get; set; }
 
+        [Required]
         public string Name { get; set; }
+        
+        [Required]
         public decimal PurchasePrice { get; set; }
         public decimal PresentPrice { get; set; }
 
-        public ShowDeviceModelDto Model { get; set; }
-        public ShowUserDto Owner { get; set; }
+        [Required]
+        public DateTime PurchaseDate { get; set; }
+
+        public AddDeviceModelDto Model { get; set; }
+
+        public ICollection<AddUserDto> Owners { get; set; }
     }
 }
