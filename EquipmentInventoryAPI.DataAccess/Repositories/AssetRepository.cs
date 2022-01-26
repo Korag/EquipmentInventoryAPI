@@ -15,38 +15,38 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
             _context = context;
         }
 
-        public void AddDevice(Asset device)
+        public void AddAsset(Asset asset)
         {
             _context.devicesEntities.Add(device);
         }
 
-        public void RemoveDevice(Asset device)
+        public void RemoveAsset(Asset asset)
         {
             _context.devicesEntities.Remove(device);
         }
 
-        public ICollection<Asset> GetDevices()
+        public ICollection<Asset> GetAssets()
         {
             return _context.devicesEntities;
         }
 
-        public Asset GetDeviceById(Guid id)
+        public Asset GetAssetById(Guid id)
         {
             return _context.devicesEntities.FirstOrDefault(x => x.Id == id);
         }
 
-        public ICollection<Asset> GetDevicesByUserId(Guid id)
+        public ICollection<Asset> GetAssetByUserId(Guid id)
         {
             return _context.devicesEntities.Where(x => x.Owners.Contains(id)).ToList();
         }
 
-        public void UpdateDevice(Asset device)
+        public void UpdateAsset(Asset asset)
         {
             var index = _context.devicesEntities.ToList().FindIndex(x => x.Id == device.Id);
-            _context.devicesEntities[index] = device;
+            _context.devicesEntities[index] = asset;
         }
 
-        public bool CheckIfDeviceExist(Guid id)
+        public bool CheckIfAssetExist(Guid id)
         {
             return _context.devicesEntities.FirstOrDefault(x => x.Id == id) == null ? true : false;
         }

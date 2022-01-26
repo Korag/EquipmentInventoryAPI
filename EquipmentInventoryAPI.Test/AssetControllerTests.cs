@@ -102,7 +102,7 @@ namespace EquipmentInventoryAPI.Test
         {
             //Arrange
             var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
-                                                        new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
+                                                      new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
 
             var id = Guid.NewGuid().ToString();
 
@@ -134,7 +134,7 @@ namespace EquipmentInventoryAPI.Test
         {
             //Arrange
             var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
-                                                        new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
+                                                      new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
             var id = Guid.NewGuid();
             var idString = Guid.NewGuid().ToString();
 

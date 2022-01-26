@@ -14,147 +14,148 @@ namespace EquipmentInventoryAPI.Controllers
     [Route("api/[controller]")]
     public class AssetController : ControllerBase
     {
-        private readonly IAssetRepository _deviceRepository;
+        private readonly IAssetRepository _assetRepository;
         private readonly IUserAssetsOwnershipRepository _userOwnershipRepository;
 
         private readonly IMapper _mapper;
 
-        public AssetController(IAssetRepository deviceRepository, 
-                                IUserAssetsOwnershipRepository userOwnershipRepository, 
-                                IMapper mapper)
+        public AssetController(IAssetRepository assetRepository, 
+                               IUserAssetsOwnershipRepository userOwnershipRepository, 
+                               IMapper mapper)
         {
-            _deviceRepository = deviceRepository;
+            _assetRepository = assetRepository;
             _userOwnershipRepository = userOwnershipRepository;
             _mapper = mapper;
         }
 
-        // GET: api/Device
+        // GET: api/Asset
         [HttpGet]
-        public async Task<ActionResult<ICollection<ShowAssetDto>>> GetDevices()
+        public async Task<ActionResult<ICollection<ShowAssetDto>>> GetAssets()
         {
-            var devices = _deviceRepository.GetDevices().ToList();
-            var devicesDto = _mapper.Map<List<ShowAssetDto>>(devices);
+            var assets = _assetRepository.GetAssets().ToList();
+            var assetsDto = _mapper.Map<List<ShowAssetDto>>(assets);
 
-            return Ok(devicesDto);
+            return Ok(assetsDto);
         }
 
-        // GET: api/Device/5
+        // GET: api/Asset/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ShowAssetDto>> GetDevice(string id)
+        public async Task<ActionResult<ShowAssetDto>> GetAsset(string id)
         {
-            var device = _deviceRepository.GetDeviceById(Guid.Parse(id));
+            var asset = _assetRepository.GetAssetById(Guid.Parse(id));
 
-            if (device == null)
+            if (asset == null)
                 return NotFound();
 
-            var deviceDto = _mapper.Map<ShowAssetDto>(device);
+            var assetDto = _mapper.Map<ShowAssetDto>(asset);
 
-            return Ok(deviceDto);
+            return Ok(assetDto);
         }
 
-        // GET: api/Device/User/5
+        // GET: api/Asset/User/5
         [HttpGet("User/{id}")]
-        public async Task<ActionResult<ICollection<ShowAssetDto>>> GetDevicesByOwnerId(string id)
+        public async Task<ActionResult<ICollection<ShowAssetDto>>> GetAssetsByOwnerId(string id)
         {
-            var userDevices = _deviceRepository.GetDevicesByUserId(Guid.Parse(id)).ToList();
+            var userAssets = _assetRepository.GetAssetByUserId(Guid.Parse(id)).ToList();
 
-            if (userDevices.Count() == 0)
+            if (userAssets.Count() == 0)
                 return NotFound();
 
-            var devicesDto = _mapper.Map<ICollection<ShowAssetDto>>(userDevices).ToList();
+            var assetsDto = _mapper.Map<ICollection<ShowAssetDto>>(userAssets).ToList();
 
-            return Ok(devicesDto);
+            return Ok(assetsDto);
         }
 
-        //// GET: api/Device/History/User/5
-        //[HttpGet("User/{id}")]
-        //public async Task<ActionResult<ICollection<ShowUserDeviceDto>>> GetDevicesByOwnerId(string id)
-        //{
-
-
-        //}
-
-
-        // POST: api/Device
+        // POST: api/Asset
         [HttpPost]
-        public async Task<ActionResult<ShowAssetDto>> PostDevice(AddAssetDto device)
+        public async Task<ActionResult<ShowAssetDto>> PostAsset(AddAssetDto asset)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var newDevice = _mapper.Map<Asset>(device);
-            newDevice.Id = Guid.NewGuid();
+            var newAsset = _mapper.Map<Asset>(asset);
+            newAsset.Id = Guid.NewGuid();
 
-            _deviceRepository.AddDevice(newDevice);
+            _assetRepository.AddAsset(newAsset);
 
-            foreach (var owner in newDevice.Owners)
+            foreach (var owner in newAsset.Owners)
             {
-                var userDeviceOwnership = _mapper.Map<UserAssetOwnership>(newDevice);
-                userDeviceOwnership.AquireDate = DateTime.Now;
-                userDeviceOwnership.DisposalDate = DateTime.MinValue;
+                var userAssetOwnership = _mapper.Map<UserAssetOwnership>(newAsset);
+                userAssetOwnership.AquireDate = DateTime.Now;
+                userAssetOwnership.DisposalDate = DateTime.MinValue;
 
-                var userOwnerShipInfo = _userOwnershipRepository.GetUserAssetOwnershipById(owner);
+                var userOwnershipInfo = _userOwnershipRepository.GetUserAssetOwnershipById(owner);
 
-                if (userOwnerShipInfo == null)
+                if (userOwnershipInfo == null)
                 {
-                    userOwnerShipInfo = new UserAssets();
+                    userOwnershipInfo = new UserAssets();
 
-                    userOwnerShipInfo.Id = Guid.NewGuid();
-                    userOwnerShipInfo.OwnerId = owner;
+                    userOwnershipInfo.Id = Guid.NewGuid();
+                    userOwnershipInfo.OwnerId = owner;
                 }
 
-                userOwnerShipInfo.Assets.Add(userDeviceOwnership);
-                _userOwnershipRepository.AddUserAssetOwnership(userOwnerShipInfo);
+                userOwnershipInfo.Assets.Add(userAssetOwnership);
+                _userOwnershipRepository.AddUserAssetOwnership(userOwnershipInfo);
             }
 
-            var deviceDto = _mapper.Map<ShowAssetDto>(newDevice);
+            var assetDto = _mapper.Map<ShowAssetDto>(newAsset);
 
-            return CreatedAtAction("GetDevice", new { id = deviceDto.Id }, deviceDto);
+            return CreatedAtAction("GetAsset", new { id = assetDto.Id }, assetDto);
         }
 
-        // PUT: api/Device
+        // PUT: api/Asset
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDevice(string id, UpdateAssetDto device)
+        public async Task<IActionResult> UpdateAsset(string id, UpdateAssetDto asset)
         {
-            if (Guid.Parse(id) != device.Id || !ModelState.IsValid)
+            if (Guid.Parse(id) != asset.Id || !ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!_deviceRepository.CheckIfDeviceExist(device.Id))
+            if (!_assetRepository.CheckIfAssetExist(asset.Id))
             {
                 return NotFound();
             }
             else
             {
-                var updatedDevice = _mapper.Map<Asset>(device);
-                _deviceRepository.UpdateDevice(updatedDevice);
+                var updatedAsset = _mapper.Map<Asset>(asset);
+                _assetRepository.UpdateAsset(updatedAsset);
             }
 
             return NoContent();
         }
 
-        // DELETE: api/Device/5
+        // DELETE: api/Asset/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDevice(string id)
+        public async Task<IActionResult> DeleteAsset(string id)
         {
-            var device = _deviceRepository.GetDeviceById(Guid.Parse(id));
+            var asset = _assetRepository.GetAssetById(Guid.Parse(id));
 
-            if (device == null)
+            if (asset == null)
                 return NotFound();
 
-            _deviceRepository.RemoveDevice(device);
+            _assetRepository.RemoveAsset(asset);
 
-            //foreach (var owner in device.Owners)
-            //{
-            //    var userOwnerShipInfo = _userOwnershipRepository.GetUserOwnershipInfoByUserId(owner.Id);
+            foreach (var owner in asset.Owners)
+            {
+                //var userOwnerShipInfo = _userOwnershipRepository.GetUserAssetOwnershipById(owner);
 
-            //    if (userOwnerShipInfo != null)
-            //    {
-            //        if (userOwnerShipInfo.Devices.Select(x => x.Id).Contains(Guid.Parse(id)))
-            //        {
-            //            _userOwnershipRepository.
-            //        }
-            //    }
-            //}
+                //if (userOwnerShipInfo != null)
+                //{
+                //    if (userOwnerShipInfo.Assets.Select(x => x.Id).Contains(Guid.Parse(id)))
+                //    {
+                //        _userOwnershipRepository.
+                //    }
+                //}
+
+                //TODO:
+                //Remove Ownership
+                //UserController
+                //UserRepo
+                //GetUserDevicesOwnershipHistory
+                //GetDevicesWhichLastsLongerThan3YearsInOwnership
+                //Add missing tests
+
+                //Add Angular simple GUI
+            }
 
             return NoContent();
         }

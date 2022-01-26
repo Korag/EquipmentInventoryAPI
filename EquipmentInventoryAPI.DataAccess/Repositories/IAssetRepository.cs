@@ -6,12 +6,12 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
 {
     public interface IAssetRepository
     {
-        public void AddDevice(Asset device);
-        public void RemoveDevice(Asset device);
-        public ICollection<Asset> GetDevices();
-        public Asset GetDeviceById(Guid id);
-        public ICollection<Asset> GetDevicesByUserId(Guid id);
-        public void UpdateDevice(Asset device);
-        bool CheckIfDeviceExist(Guid id);
+        public void AddAsset(Asset device);
+        public void RemoveAsset(Asset device);
+        public ICollection<Asset> GetAssets();
+        public Asset GetAssetById(Guid id);
+        public ICollection<Asset> GetAssetByUserId(Guid id);
+        public void UpdateAsset(Asset device);
+        bool CheckIfAssetExist(Guid id);
     }
 }

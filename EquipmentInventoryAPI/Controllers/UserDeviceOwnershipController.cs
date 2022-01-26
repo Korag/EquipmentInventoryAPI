@@ -35,5 +35,14 @@ namespace EquipmentInventoryAPI.Controllers
 
         //    return Ok(devicesDto);
         //}
+
+
+        //// GET: api/Device/History/User/5
+        //[HttpGet("User/{id}")]
+        //public async Task<ActionResult<ICollection<ShowUserDeviceDto>>> GetDevicesByOwnerId(string id)
+        //{
+
+
+        //}
     }
 }
