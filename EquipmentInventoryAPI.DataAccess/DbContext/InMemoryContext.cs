@@ -7,6 +7,7 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
     public class InMemoryContext
     {
         public readonly IList<IDevice> devicesEntities = new List<IDevice>();
+        public readonly IList<UserOwnershipInfo> usersDevicesEntities = new List<UserOwnershipInfo>();
 
         public InMemoryContext()
         {
