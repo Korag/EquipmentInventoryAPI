@@ -77,8 +77,6 @@ namespace EquipmentInventoryAPI.Controllers
             newAsset.Id = Guid.NewGuid();
 
             _assetRepository.AddAsset(newAsset);
-            AddUserAssetOwnership(newAsset);
-
             var assetDto = _mapper.Map<ShowAssetDto>(newAsset);
 
             return CreatedAtAction("GetAsset", new { id = assetDto.Id }, assetDto);
@@ -114,60 +112,8 @@ namespace EquipmentInventoryAPI.Controllers
                 return NotFound();
 
             _assetRepository.RemoveAsset(asset);
-            RemoveUserAssetOwnership(asset);
 
             return NoContent();
-        }
-
-        private void AddUserAssetOwnership(Asset asset)
-        {
-            foreach (var owner in asset.Owners)
-            {
-                var userAssetOwnership = _mapper.Map<UserAssetOwnership>(asset);
-                userAssetOwnership.AquireDate = DateTime.Now;
-                userAssetOwnership.DisposalDate = DateTime.MinValue;
-
-                var userOwnershipInfo = _userOwnershipRepository.GetUserAssetOwnershipById(owner);
-
-                if (userOwnershipInfo == null)
-                {
-                    userOwnershipInfo = new UserAssets();
-
-                    userOwnershipInfo.Id = Guid.NewGuid();
-                    userOwnershipInfo.OwnerId = owner;
-                }
-
-                userOwnershipInfo.Assets.Add(userAssetOwnership);
-                _userOwnershipRepository.AddUserAssetOwnership(userOwnershipInfo);
-            }
-        }
-
-        private void RemoveUserAssetOwnership(Asset asset)
-        {
-            foreach (var owner in asset.Owners)
-            {
-                var userOwnershipInfo = _userOwnershipRepository.GetUserAssetOwnershipById(owner);
-
-                if (userOwnershipInfo != null)
-                {
-                    var userAsset = userOwnershipInfo.Assets.Where(x => x.DeviceId == asset.Id).FirstOrDefault();
-
-                    if (userAsset != null)
-                    {
-                        userOwnershipInfo.Assets.Remove(userAsset);
-                        _userOwnershipRepository.UpdateUserAssetOwnership(userOwnershipInfo);
-                    }
-                }
-
-                //TODO:
-                //UserController
-                //UserRepo
-                //GetUserDevicesOwnershipHistory
-                //GetDevicesWhichLastsLongerThan3YearsInOwnership
-                //Add missing tests
-
-                //Add Angular simple GUI
-            }
         }
     }
 }
