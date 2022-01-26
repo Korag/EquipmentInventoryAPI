@@ -10,5 +10,6 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
         public ICollection<IDevice> GetDevices();
         public IDevice GetDeviceById(int id);
         public void UpdateDevice(IDevice device);
+        bool CheckIfDeviceExist(int id);
     }
 }

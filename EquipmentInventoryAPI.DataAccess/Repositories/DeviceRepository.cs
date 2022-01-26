@@ -9,9 +9,9 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
     {
         private InMemoryContext _context { get; set; }
 
-        public DeviceRepository()
+        public DeviceRepository(InMemoryContext context)
         {
-
+            _context = context;
         }
 
         public void AddDevice(IDevice device)
@@ -38,6 +38,18 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
         {
             var index = _context.devicesEntities.ToList().FindIndex(x => x.Id == device.Id);
             _context.devicesEntities[index] = device;
+        }
+
+        public bool CheckIfDeviceExist(int id)
+        {
+            if (_context.devicesEntities.FirstOrDefault(x => x.Id == id) == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
