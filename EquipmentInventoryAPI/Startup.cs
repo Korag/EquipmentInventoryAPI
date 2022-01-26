@@ -1,3 +1,5 @@
+using EquipmentInventoryAPI.DataAccess.DbContext;
+using EquipmentInventoryAPI.DataAccess.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,11 +34,27 @@ namespace EquipmentInventoryAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EquipmentInventoryAPI", Version = "v1" });
             });
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                             .AllowAnyHeader()
+                                             .AllowAnyMethod();
+                                  });
+            });
+
+            services.AddSingleton<InMemoryContext, InMemoryContext>();
+            services.AddTransient<IDeviceRepository, DeviceRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

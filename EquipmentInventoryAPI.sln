@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventoryAPI", "EquipmentInventoryAPI\EquipmentInventoryAPI.csproj", "{7076D70B-7138-42E9-83E6-C89C2DEB94C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventoryAPI.Library", "EquipmentInventoryAPI.Library\EquipmentInventoryAPI.Library.csproj", "{61D1807A-D429-4F9A-89FE-3364AD9DCE60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentInventoryAPI.DataAccess", "EquipmentInventoryAPI.DataAccess\EquipmentInventoryAPI.DataAccess.csproj", "{D05D4482-5D7E-4B03-B763-4D263E6B21B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{7076D70B-7138-42E9-83E6-C89C2DEB94C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7076D70B-7138-42E9-83E6-C89C2DEB94C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7076D70B-7138-42E9-83E6-C89C2DEB94C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61D1807A-D429-4F9A-89FE-3364AD9DCE60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D1807A-D429-4F9A-89FE-3364AD9DCE60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D1807A-D429-4F9A-89FE-3364AD9DCE60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D1807A-D429-4F9A-89FE-3364AD9DCE60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D05D4482-5D7E-4B03-B763-4D263E6B21B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D05D4482-5D7E-4B03-B763-4D263E6B21B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D05D4482-5D7E-4B03-B763-4D263E6B21B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D05D4482-5D7E-4B03-B763-4D263E6B21B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
