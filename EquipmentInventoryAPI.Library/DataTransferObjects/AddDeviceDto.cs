@@ -23,5 +23,7 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
         public DateTime PurchaseDate { get; set; }
 
         public AddDeviceModelDto Model { get; set; }
+
+        public AddUserDto Owner { get; set; }
     }
 }

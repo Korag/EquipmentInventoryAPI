@@ -29,6 +29,10 @@ namespace EquipmentInventoryAPI.Library.Profiles
             CreateMap<UpdateDeviceDto, IDevice>();
             CreateMap<UpdateManufacturerDto, Manufacturer>();
             CreateMap<UpdateDeviceModelDto, DeviceModel>();
+
+            CreateMap<AddUserDto, User>();
+            CreateMap<User, ShowUserDto>();
+            CreateMap<UpdateUserDto, User>();
         }
     }
 }

@@ -21,5 +21,6 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
         public decimal PresentPrice { get; set; }
 
         public ShowDeviceModelDto Model { get; set; }
+        public ShowUserDto Owner { get; set; }
     }
 }

@@ -27,6 +27,8 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
 
         public UpdateDeviceModelDto Model { get; set; }
 
+        public UpdateUserDto Owner { get; set; }
+
         public UpdateDeviceDto()
         {
 
