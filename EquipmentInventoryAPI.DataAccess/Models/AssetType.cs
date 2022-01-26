@@ -4,6 +4,8 @@
     {
         Notebook,
         PC,
-        Printer
+        Printer,
+        Keyboard,
+        Mouse
     }
 }

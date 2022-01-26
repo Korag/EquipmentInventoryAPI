@@ -17,38 +17,38 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
 
         public void AddAsset(Asset asset)
         {
-            _context.devicesEntities.Add(asset);
+            _context.assetsSet.Add(asset);
         }
 
         public void RemoveAsset(Asset asset)
         {
-            _context.devicesEntities.Remove(asset);
+            _context.assetsSet.Remove(asset);
         }
 
         public ICollection<Asset> GetAssets()
         {
-            return _context.devicesEntities;
+            return _context.assetsSet;
         }
 
         public Asset GetAssetById(Guid id)
         {
-            return _context.devicesEntities.FirstOrDefault(x => x.Id == id);
+            return _context.assetsSet.FirstOrDefault(x => x.Id == id);
         }
 
         public ICollection<Asset> GetAssetByUserId(Guid id)
         {
-            return _context.devicesEntities.Where(x => x.Owners.Contains(id)).ToList();
+            return _context.assetsSet.Where(x => x.Owners.Contains(id)).ToList();
         }
 
         public void UpdateAsset(Asset asset)
         {
-            var index = _context.devicesEntities.ToList().FindIndex(x => x.Id == asset.Id);
-            _context.devicesEntities[index] = asset;
+            var index = _context.assetsSet.ToList().FindIndex(x => x.Id == asset.Id);
+            _context.assetsSet[index] = asset;
         }
 
         public bool CheckIfAssetExist(Guid id)
         {
-            return _context.devicesEntities.FirstOrDefault(x => x.Id == id) == null ? true : false;
+            return _context.assetsSet.FirstOrDefault(x => x.Id == id) != null ? true : false;
         }
     }
 }

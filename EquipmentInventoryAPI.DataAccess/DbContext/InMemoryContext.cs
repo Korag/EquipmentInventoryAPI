@@ -6,8 +6,9 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
 {
     public class InMemoryContext
     {
-        public readonly IList<Asset> devicesEntities = new List<Asset>();
-        public readonly IList<UserAssets> usersDevicesEntities = new List<UserAssets>();
+        public readonly IList<Asset> assetsSet = new List<Asset>();
+        public readonly IList<UserAssetsOwnership> usersAssetsSet = new List<UserAssetsOwnership>();
+        public readonly IList<User> usersSet = new List<User>();
 
         public InMemoryContext()
         {
@@ -16,7 +17,7 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
 
         public void SeedInMemoryDatabase()
         {
-            devicesEntities.Add(new Asset()
+            assetsSet.Add(new Asset()
             {
                 Id = Guid.Parse("c579968b-4e44-40ac-a948-2abe3aefc054"),
                 SerialNumber = "ZXCZVGASG218",
@@ -29,7 +30,7 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                    Guid.Parse("c579968b-4e44-40ac-a948-2abe3aefc224")
                 }
             }); ;
-            devicesEntities.Add(new Asset()
+            assetsSet.Add(new Asset()
             {
                 Id = Guid.NewGuid(),
                 SerialNumber = "ZXCZVGAZG218",
@@ -42,7 +43,7 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                  Guid.Parse("c979968b-4e44-40ac-a948-2abe3aefc224")
                 }
             });
-            devicesEntities.Add(new Asset()
+            assetsSet.Add(new Asset()
             {
                 Id = Guid.NewGuid(),
                 SerialNumber = "DGHASJGDJA",
