@@ -19,7 +19,7 @@ namespace EquipmentInventoryAPI.DataAccess.Models
 
         public DeviceModel Model { get; set; }
 
-        public User Owner { get; set; }
+        public ICollection<User> Owners { get; set; }
 
         public IDevice()
         {

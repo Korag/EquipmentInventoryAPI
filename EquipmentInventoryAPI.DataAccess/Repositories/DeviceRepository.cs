@@ -37,7 +37,7 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
 
         public ICollection<IDevice> GetDevicesByUserId(Guid id)
         {
-            return _context.devicesEntities.Where(x => x.Owner.Id == id).ToList();
+            return _context.devicesEntities.Where(x => x.Owners.Select(x => x.Id).Contains(id)).ToList();
         }
 
         public void UpdateDevice(IDevice device)

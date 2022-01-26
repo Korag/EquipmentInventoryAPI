@@ -38,11 +38,13 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                         Address = "Polna 1"
                     }
                 },
-                Owner = new User()
+                Owners = new List<User>()
                 {
-                    Id = Guid.Parse("c579968b-4e44-40ac-a948-2abe3aefc224"),
-                    FirstName = "Test",
-                    LastName = "User"
+                    new User(){
+                         Id = Guid.Parse("c579968b-4e44-40ac-a948-2abe3aefc224"),
+                         FirstName = "Test",
+                         LastName = "User"
+                    }
                 }
             });
             devicesEntities.Add(new Notebook()
@@ -68,13 +70,14 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                         Address = "Street A/20"
                     }
                 },
-                Owner = new User()
+                Owners = new List<User>()
                 {
-                    Id = Guid.NewGuid(),
-                    FirstName = "User",
-                    LastName = "Second"
-                }
-            });;
+                    new User(){
+                         Id = Guid.NewGuid(),
+                         FirstName = "User",
+                         LastName = "Second"
+                }}
+            }); ;
             devicesEntities.Add(new Notebook()
             {
                 Id = Guid.NewGuid(),
@@ -98,12 +101,13 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                         Address = "Strase20"
                     }
                 },
-                Owner = new User()
+                Owners = new List<User>()
                 {
-                    Id = Guid.Parse("c579968b-4e44-40ac-a948-2abe3aefc224"),
-                    FirstName = "Test",
-                    LastName = "User"
-                }
+                    new User(){
+                         Id = Guid.Parse("c579968b-4e44-40ac-a948-2abe3aefc224"),
+                         FirstName = "Test",
+                         LastName = "User"
+                }}
             }); ;
         }
     }

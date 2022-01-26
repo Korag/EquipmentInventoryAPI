@@ -34,7 +34,7 @@ namespace EquipmentInventoryAPI.Controllers
             {
                 devicesDto[i].Model = _mapper.Map<ShowDeviceModelDto>(devices[i].Model);
                 devicesDto[i].Model.Manufacturer = _mapper.Map<ShowManufacturerDto>(devices[i].Model.Manufacturer);
-                devicesDto[i].Owner = _mapper.Map<ShowUserDto>(devices[i].Owner);
+                devicesDto[i].Owners = _mapper.Map<ICollection<ShowUserDto>>(devices[i].Owners);
             }
 
             return Ok(devicesDto);
@@ -52,7 +52,7 @@ namespace EquipmentInventoryAPI.Controllers
             var deviceDto = _mapper.Map<ShowDeviceDto>(device);
             deviceDto.Model = _mapper.Map<ShowDeviceModelDto>(device.Model);
             deviceDto.Model.Manufacturer = _mapper.Map<ShowManufacturerDto>(device.Model.Manufacturer);
-            deviceDto.Owner = _mapper.Map<ShowUserDto>(device.Owner);
+            deviceDto.Owners = _mapper.Map<ICollection<ShowUserDto>>(device.Owners);
 
             return Ok(deviceDto);
         }
@@ -72,7 +72,7 @@ namespace EquipmentInventoryAPI.Controllers
             {
                 devicesDto[i].Model = _mapper.Map<ShowDeviceModelDto>(userDevices[i].Model);
                 devicesDto[i].Model.Manufacturer = _mapper.Map<ShowManufacturerDto>(userDevices[i].Model.Manufacturer);
-                devicesDto[i].Owner = _mapper.Map<ShowUserDto>(userDevices[i].Owner);
+                devicesDto[i].Owners = _mapper.Map<ICollection<ShowUserDto>>(userDevices[i].Owners);
             }
 
             return Ok(devicesDto);
@@ -94,7 +94,7 @@ namespace EquipmentInventoryAPI.Controllers
             newDevice.Model.Manufacturer = _mapper.Map<Manufacturer>(device.Model.Manufacturer);
             newDevice.Model.Manufacturer.Id = Guid.NewGuid();
 
-            newDevice.Owner = _mapper.Map<User>(device.Owner);
+            newDevice.Owners = _mapper.Map<ICollection<User>>(device.Owners);
 
             _deviceRepository.AddDevice(newDevice);
 
@@ -121,7 +121,7 @@ namespace EquipmentInventoryAPI.Controllers
                 var updatedDevice = _mapper.Map<IDevice>(device);
                 updatedDevice.Model = _mapper.Map<DeviceModel>(device.Model);
                 updatedDevice.Model.Manufacturer = _mapper.Map<Manufacturer>(device.Model.Manufacturer);
-                updatedDevice.Owner = _mapper.Map<User>(device.Owner);
+                updatedDevice.Owners = _mapper.Map<ICollection<User>>(device.Owners);
 
                 _deviceRepository.UpdateDevice(updatedDevice);
             }
