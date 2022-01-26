@@ -57,6 +57,27 @@ namespace EquipmentInventoryAPI.Controllers
             return Ok(deviceDto);
         }
 
+        // GET: api/Device/User/5
+        [HttpGet("User/{id}")]
+        public async Task<ActionResult<ICollection<ShowDeviceDto>>> GetDevicesByOwnerId(string id)
+        {
+            var userDevices = _deviceRepository.GetDevicesByUserId(Guid.Parse(id)).ToList();
+
+            if (userDevices.Count() == 0)
+                return NotFound();
+
+            var devicesDto = _mapper.Map<ICollection<ShowDeviceDto>>(userDevices).ToList();
+
+            for (int i = 0; i < userDevices.Count; i++)
+            {
+                devicesDto[i].Model = _mapper.Map<ShowDeviceModelDto>(userDevices[i].Model);
+                devicesDto[i].Model.Manufacturer = _mapper.Map<ShowManufacturerDto>(userDevices[i].Model.Manufacturer);
+                devicesDto[i].Owner = _mapper.Map<ShowUserDto>(userDevices[i].Owner);
+            }
+
+            return Ok(devicesDto);
+        }
+
         // POST: api/Device
         [HttpPost]
         public async Task<ActionResult<ShowDeviceDto>> PostDevice(AddDeviceDto device)

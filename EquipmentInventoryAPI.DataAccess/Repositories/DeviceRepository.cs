@@ -35,6 +35,11 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
             return _context.devicesEntities.FirstOrDefault(x => x.Id == id);
         }
 
+        public ICollection<IDevice> GetDevicesByUserId(Guid id)
+        {
+            return _context.devicesEntities.Where(x => x.Owner.Id == id).ToList();
+        }
+
         public void UpdateDevice(IDevice device)
         {
             var index = _context.devicesEntities.ToList().FindIndex(x => x.Id == device.Id);

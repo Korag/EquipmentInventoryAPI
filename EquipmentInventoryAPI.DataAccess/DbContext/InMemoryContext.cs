@@ -75,6 +75,36 @@ namespace EquipmentInventoryAPI.DataAccess.DbContext
                     LastName = "Second"
                 }
             });;
+            devicesEntities.Add(new Notebook()
+            {
+                Id = Guid.NewGuid(),
+                SerialNumber = "DGHASJGDJA",
+                Name = "Test notebook 3",
+                PresentPrice = 800,
+                PurchasePrice = 2800,
+                PurchaseDate = System.DateTime.UtcNow,
+                Model = new DeviceModel()
+                {
+                    Id = Guid.NewGuid(),
+                    ModelNumber = "HHAGSHFAGT",
+                    Manufacturer = new Manufacturer()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "Thortn",
+                        ContactNumber = "763812390",
+                        EmailAddress = "contact@thornt.com",
+                        Country = "Germany",
+                        City = "Hannover",
+                        Address = "Strase20"
+                    }
+                },
+                Owner = new User()
+                {
+                    Id = Guid.Parse("c579968b-4e44-40ac-a948-2abe3aefc224"),
+                    FirstName = "Test",
+                    LastName = "User"
+                }
+            }); ;
         }
     }
 }
