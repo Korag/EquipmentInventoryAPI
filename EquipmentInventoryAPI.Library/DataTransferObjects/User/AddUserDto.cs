@@ -10,6 +10,9 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
         [Required]
         public string LastName { get; set; }
 
+        public string EmailAddress { get; set; }
+        public string ContactPhone { get; set; }
+
         public AddUserDto()
         {
 

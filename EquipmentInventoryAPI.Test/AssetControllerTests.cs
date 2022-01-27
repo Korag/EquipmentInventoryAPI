@@ -14,6 +14,7 @@ namespace EquipmentInventoryAPI.Test
     public class AssetControllerTests
     {
         public IMapper mapper { get; set; }
+        public AssetController _assetController { get; set; }
 
         public AssetControllerTests()
         {
@@ -22,17 +23,16 @@ namespace EquipmentInventoryAPI.Test
                 cfg.AddProfile(new AutoMapperProfiles());
             });
             mapper = mockMapper.CreateMapper();
+
+            _assetController = new AssetController(new AssetRepository(new InMemoryContext()),
+                                                   mapper);
         }
 
         [Fact]
         public void GetAssets_ReturnInMemoryDbContent()
         {
-            //Arrange
-            var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
-                                                       new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
-
             //Act
-            var result = assetController.GetAssets().Result;
+            var result = _assetController.GetAssets().Result;
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
@@ -44,12 +44,8 @@ namespace EquipmentInventoryAPI.Test
         [InlineData("c579968b-4e44-40ac-a948-2abe3aefc054")]
         public void GetAssetById_ReturnAssetIfIdIsValid(string id)
         {
-            //Arrange
-            var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
-                                                       new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
-
             //Act
-            var result = assetController.GetAsset(id).Result;
+            var result = _assetController.GetAsset(id).Result;
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
@@ -70,11 +66,8 @@ namespace EquipmentInventoryAPI.Test
                 PurchaseDate = DateTimeOffset.UtcNow
             };
 
-            var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
-                                                      new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
-
             //Act
-            var result = assetController.PostAsset(assetDto).Result;
+            var result = _assetController.PostAsset(assetDto).Result;
 
             //Assert
             var okResult = Assert.IsType<CreatedAtActionResult>(result.Result);
@@ -86,12 +79,8 @@ namespace EquipmentInventoryAPI.Test
         [InlineData("c579968b-4e44-40ac-a948-2abe3aefc054")]
         public void DeleteAsset_IfAssetExist_ReturnNoContent(string id)
         {
-            //Arrange
-            var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
-                                                        new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
-
             //Act
-            var result = assetController.DeleteAsset(id).Result;
+            var result = _assetController.DeleteAsset(id).Result;
 
             //Assert
             var noContentResult = Assert.IsType<NoContentResult>(result);
@@ -100,14 +89,10 @@ namespace EquipmentInventoryAPI.Test
         [Fact]
         public void DeleteAsset_IfAssetNotExist_ReturnNotFound()
         {
-            //Arrange
-            var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
-                                                      new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
-
             var id = Guid.NewGuid().ToString();
 
             //Act
-            var result = assetController.DeleteAsset(id).Result;
+            var result = _assetController.DeleteAsset(id).Result;
 
             //Assert
             var notFoundResult = Assert.IsType<NotFoundResult>(result);
@@ -116,14 +101,11 @@ namespace EquipmentInventoryAPI.Test
         [Fact]
         public void UpdateAsset_IfAssetNotExistButIdsAreEqual_ReturnNotFound()
         {
-            //Arrange
-            var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
-                                                        new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
             var id = Guid.NewGuid();
             var idString = id.ToString();
 
             //Act
-            var result = assetController.UpdateAsset(idString, new UpdateAssetDto() { Id = id }).Result;
+            var result = _assetController.UpdateAsset(idString, new UpdateAssetDto() { Id = id }).Result;
 
             //Assert
             var notFoundResult = Assert.IsType<NotFoundResult>(result);
@@ -132,14 +114,11 @@ namespace EquipmentInventoryAPI.Test
         [Fact]
         public void UpdateAsset_IfAssetIdsAreDifferent_ReturnBadRequest()
         {
-            //Arrange
-            var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
-                                                      new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
             var id = Guid.NewGuid();
             var idString = Guid.NewGuid().ToString();
 
             //Act
-            var result = assetController.UpdateAsset(idString, new UpdateAssetDto() { Id = id }).Result;
+            var result = _assetController.UpdateAsset(idString, new UpdateAssetDto() { Id = id }).Result;
 
             //Assert
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
@@ -149,12 +128,8 @@ namespace EquipmentInventoryAPI.Test
         [InlineData("c579968b-4e44-40ac-a948-2abe3aefc224")]
         public void GetAssetsByUserId_ReturnAssetIfIdIsValid(string id)
         {
-            //Arrange
-            var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
-                                                        new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
-
             //Act
-            var result = assetController.GetAssetsByOwnerId(id).Result;
+            var result = _assetController.GetAssetsByOwnerId(id).Result;
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);

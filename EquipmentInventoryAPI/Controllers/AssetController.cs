@@ -15,16 +15,13 @@ namespace EquipmentInventoryAPI.Controllers
     public class AssetController : ControllerBase
     {
         private readonly IAssetRepository _assetRepository;
-        private readonly IUserAssetsOwnershipRepository _userOwnershipRepository;
 
         private readonly IMapper _mapper;
 
         public AssetController(IAssetRepository assetRepository,
-                               IUserAssetsOwnershipRepository userOwnershipRepository,
                                IMapper mapper)
         {
             _assetRepository = assetRepository;
-            _userOwnershipRepository = userOwnershipRepository;
             _mapper = mapper;
         }
 
