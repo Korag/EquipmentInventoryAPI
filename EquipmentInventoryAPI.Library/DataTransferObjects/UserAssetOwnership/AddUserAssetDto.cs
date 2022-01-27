@@ -8,8 +8,7 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
         [Required]
         public Guid AssetId { get; set; }
 
-        [Required]
-        public DateTimeOffset AquireDate { get; set; }
+        public DateTimeOffset? AquireDate { get; set; }
         public DateTimeOffset? DisposalDate { get; set; }
     }
 }

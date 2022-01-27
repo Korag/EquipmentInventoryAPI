@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+
+.modal-content{
+    height: 600px;
+}
+
+.cdk-overlay-container {
+    position: fixed;
+    z-index: 6000;
+}

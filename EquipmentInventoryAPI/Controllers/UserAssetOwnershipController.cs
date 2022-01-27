@@ -93,6 +93,7 @@ namespace EquipmentInventoryAPI.Controllers
 
             var userAsset = _mapper.Map<UserAsset>(addUserAsset.Asset);
             userAsset.Id = Guid.NewGuid();
+
             userAsset.AquireDate = DateTimeOffset.UtcNow;
             userAsset.DisposalDate = null;
 

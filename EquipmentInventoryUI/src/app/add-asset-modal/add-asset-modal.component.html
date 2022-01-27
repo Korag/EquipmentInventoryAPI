@@ -1,0 +1,79 @@
+<div class="modal-body p-4 text-center">
+    <h5 class="mb-4">Add asset</h5>
+
+    <form [formGroup]="createAssetForm" (ngSubmit)="createAsset()">
+        <div class="form-floating mb-3">
+            <input type="text" formControlName="serialNumber" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.serialNumber.errors }" />
+            <label for="floatingInput">Serial number</label>
+            <div *ngIf="submitted && f.serialNumber.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.serialNumber.errors.required">Serial number is required</div>
+                <div *ngIf="f.serialNumber.errors.minlength || f.serialNumber.errors.maxlength">Serial
+                    number must be between 2 and 100 characters long</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="name" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                <label for="floatingInput" style="margin-left:12px">Name</label>
+                <div *ngIf="submitted && f.name.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.name.errors.required">Name is required</div>
+                    <div *ngIf="f.name.errors.minlength || f.name.errors.maxlength">Name must be between 2
+                        and 100 characters long</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="purchasePrice" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.purchasePrice.errors }" />
+                <label for="floatingInput" style="margin-left:12px">Purchase price</label>
+                <div *ngIf="submitted && f.purchasePrice.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.purchasePrice.errors.required">Purchase price is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="presentPrice" class="form-control" />
+                <label for="floatingInput" style="margin-left:12px">Present price</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-floating mb-3">
+                <input formControlName="purchaseDate" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.purchaseDate.errors }" [owlDateTimeTrigger]="dtPicker2"
+                    [owlDateTime]="dtPicker2">
+                <label for="floatingInput" style="margin-left:12px">Purchase date</label>
+                <owl-date-time #dtPicker2></owl-date-time>
+                <div *ngIf="submitted && f.purchaseDate.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.purchaseDate.errors.required">Purchase date is required
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <ng-multiselect-dropdown [placeholder]="'Choose a type'" [settings]="dropdownSettingsTypes"
+            [data]="dropdownListTypes" [(ngModel)]="selectedItemType">
+        </ng-multiselect-dropdown>
+    </div>
+
+    <div class="mt-2">
+        <ng-multiselect-dropdown [placeholder]="'Owners'" [settings]="dropdownSettingsUsers" [data]="dropdownListUsers"
+            [(ngModel)]="selectedItemsUsers">
+        </ng-multiselect-dropdown>
+    </div>
+
+</div>
+<div class="modal-footer flex-nowrap p-0">
+    <button [disabled]="loading" class="btn btn-lg fs-6 text-decoration-none col-6 m-0 rounded-0"
+        (click)="createAsset()">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        <strong>Add</strong>
+    </button>
+    <button [disabled]="loading" class="btn btn-lg fs-6 text-decoration-none col-6 m-0 rounded-0"
+        (click)="closeModal()"><strong>Cancel</strong></button>
+</div>
