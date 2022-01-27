@@ -15,13 +15,17 @@ namespace EquipmentInventoryAPI.Controllers
     public class UserAssetOwnershipController : ControllerBase
     {
         private readonly IUserAssetsOwnershipRepository _userOwnershipRepository;
+        private readonly IUserRepository _userRepository;
 
         private readonly IMapper _mapper;
 
-        public UserAssetOwnershipController(IUserAssetsOwnershipRepository userOwnershipRepository, IMapper mapper)
+        public UserAssetOwnershipController(IUserAssetsOwnershipRepository userOwnershipRepository,
+                                            IUserRepository userRepository,
+                                            IMapper mapper)
         {
             _mapper = mapper;
             _userOwnershipRepository = userOwnershipRepository;
+            _userRepository = userRepository;
         }
 
         // GET: api/UserAssetOwnership
@@ -29,25 +33,49 @@ namespace EquipmentInventoryAPI.Controllers
         public async Task<ActionResult<ICollection<ShowUserAssetsOwnershipDto>>> GetUsersAssets()
         {
             var userAssets = _userOwnershipRepository.GetUserAssetsOwnership().ToList();
-            var userAssetsDto = _mapper.Map<List<ShowUserAssetsOwnershipDto>>(userAssets);
+            var userAssetsDto = new List<ShowUserAssetsOwnershipDto>();
 
             for (int i = 0; i < userAssets.Count; i++)
+            {
                 userAssetsDto[i].Assets = _mapper.Map<ICollection<ShowUserAssetDto>>(userAssets[i].Assets);
+                userAssetsDto[i].User = _mapper.Map<ShowUserDto>(_userRepository.GetUserById(userAssets[i].UserId));
+            }
 
             return Ok(userAssetsDto);
         }
 
         // GET: api/UserAssetOwnership/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ShowUserAssetDto>> GetUserAssetsOwnershipByUserId(string id)
+        public async Task<ActionResult<ShowUserAssetsOwnershipDto>> GetUserAssetsOwnershipByUserId(string id)
         {
             var userAssetsOwnership = _userOwnershipRepository.GetUserAssetOwnershipByUserId(Guid.Parse(id));
 
             if (userAssetsOwnership == null)
                 return NotFound();
 
-            var userAssetsOwnershipDto = _mapper.Map<ShowUserAssetsOwnershipDto>(userAssetsOwnership);
+            var userAssetsOwnershipDto = new ShowUserAssetsOwnershipDto();
+            userAssetsOwnershipDto.User = _mapper.Map<ShowUserDto>(_userRepository.GetUserById(userAssetsOwnership.UserId));
             userAssetsOwnershipDto.Assets = _mapper.Map<ICollection<ShowUserAssetDto>>(userAssetsOwnership.Assets);
+
+            return Ok(userAssetsOwnershipDto);
+        }
+
+        // GET: api/UserAssetOwnership/OwnedOver/5
+        [HttpGet("OwnedOver/{months}")]
+        public async Task<ActionResult<ICollection<ShowUserAssetsOwnershipDto>>> GetUserAssetsOwnedOverPeriodOfTime(int months)
+        {
+            var userAssetsOwnership = _userOwnershipRepository.GetUserAssetOwnershipOwnedOver(months);
+            var userAssetsOwnershipDto = new List<ShowUserAssetsOwnershipDto>();
+
+            foreach (var usersAssets in userAssetsOwnership)
+            {
+                var userAssets = new ShowUserAssetsOwnershipDto();
+
+                userAssets.User = _mapper.Map<ShowUserDto>(_userRepository.GetUserById(usersAssets.UserId));
+                userAssets.Assets = _mapper.Map<ICollection<ShowUserAssetDto>>(usersAssets.Assets);
+
+                userAssetsOwnershipDto.Add(userAssets);
+            }
 
             return Ok(userAssetsOwnershipDto);
         }
@@ -143,7 +171,5 @@ namespace EquipmentInventoryAPI.Controllers
 
             return NoContent();
         }
-
-        //GetUserAssetsPossesedLongerThan(months)
     }
 }

@@ -25,7 +25,7 @@ namespace EquipmentInventoryAPI.Test
         }
 
         [Fact]
-        public void GetDevices_ReturnInMemoryDbContent()
+        public void GetAssets_ReturnInMemoryDbContent()
         {
             //Arrange
             var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
@@ -42,7 +42,7 @@ namespace EquipmentInventoryAPI.Test
 
         [Theory]
         [InlineData("c579968b-4e44-40ac-a948-2abe3aefc054")]
-        public void GetDeviceById_ReturnDeviceIfIdIsValid(string id)
+        public void GetAssetById_ReturnAssetIfIdIsValid(string id)
         {
             //Arrange
             var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
@@ -58,7 +58,7 @@ namespace EquipmentInventoryAPI.Test
         }
 
         [Fact]
-        public void AddDevice_ReturnCreatedDevice()
+        public void AddAsset_ReturnCreatedAsset()
         {
             //Arrange
             var assetDto = new AddAssetDto()
@@ -84,7 +84,7 @@ namespace EquipmentInventoryAPI.Test
 
         [Theory]
         [InlineData("c579968b-4e44-40ac-a948-2abe3aefc054")]
-        public void DeleteDevice_IfDeviceExist_ReturnNoContent(string id)
+        public void DeleteAsset_IfAssetExist_ReturnNoContent(string id)
         {
             //Arrange
             var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
@@ -98,7 +98,7 @@ namespace EquipmentInventoryAPI.Test
         }
 
         [Fact]
-        public void DeleteDevice_IfDeviceNotExist_ReturnNotFound()
+        public void DeleteAsset_IfAssetNotExist_ReturnNotFound()
         {
             //Arrange
             var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
@@ -114,7 +114,7 @@ namespace EquipmentInventoryAPI.Test
         }
 
         [Fact]
-        public void UpdateDevice_IfDeviceNotExistButIdsAreEqual_ReturnNotFound()
+        public void UpdateAsset_IfAssetNotExistButIdsAreEqual_ReturnNotFound()
         {
             //Arrange
             var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
@@ -130,7 +130,7 @@ namespace EquipmentInventoryAPI.Test
         }
 
         [Fact]
-        public void UpdateDevice_IfDeviceIdsAreDifferent_ReturnBadRequest()
+        public void UpdateAsset_IfAssetIdsAreDifferent_ReturnBadRequest()
         {
             //Arrange
             var assetController = new AssetController(new AssetRepository(new InMemoryContext()),

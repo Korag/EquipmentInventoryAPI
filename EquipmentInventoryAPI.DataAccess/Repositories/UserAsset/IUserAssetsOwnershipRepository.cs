@@ -10,6 +10,7 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
         public void RemoveUserAssetOwnership(UserAssetsOwnership userOwnership);
         public ICollection<UserAssetsOwnership> GetUserAssetsOwnership();
         public UserAssetsOwnership GetUserAssetOwnershipByUserId(Guid id);
+        public ICollection<UserAssetsOwnership> GetUserAssetOwnershipOwnedOver(int months);
         public void UpdateUserAssetOwnership(UserAssetsOwnership userAsset);
         public bool CheckIfUserAssetOwnershipExist(Guid id);
     }

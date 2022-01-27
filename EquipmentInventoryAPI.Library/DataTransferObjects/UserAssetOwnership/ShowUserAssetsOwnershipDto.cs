@@ -5,7 +5,7 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
 {
     public class ShowUserAssetsOwnershipDto
     {
-        public Guid UserId { get; set; }
+        public ShowUserDto User { get; set; }
 
         public ICollection<ShowUserAssetDto> Assets { get; set; }
     }
