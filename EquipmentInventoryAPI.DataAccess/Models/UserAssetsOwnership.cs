@@ -11,7 +11,7 @@ namespace EquipmentInventoryAPI.DataAccess.Models
 
         public UserAssetsOwnership()
         {
-
+            this.Assets = new List<UserAsset>();
         }
     }
 }

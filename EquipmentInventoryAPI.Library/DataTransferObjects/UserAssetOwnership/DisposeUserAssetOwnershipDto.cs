@@ -9,7 +9,7 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
         public Guid UserId { get; set; }
 
         [Required]
-        public Guid AssetId { get; set; }
+        public Guid UserAssetId { get; set; }
 
         public DisposeUserAssetOwnershipDto()
         {

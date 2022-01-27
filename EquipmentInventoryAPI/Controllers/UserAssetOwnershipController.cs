@@ -37,8 +37,12 @@ namespace EquipmentInventoryAPI.Controllers
 
             for (int i = 0; i < userAssets.Count; i++)
             {
-                userAssetsDto[i].Assets = _mapper.Map<ICollection<ShowUserAssetDto>>(userAssets[i].Assets);
-                userAssetsDto[i].User = _mapper.Map<ShowUserDto>(_userRepository.GetUserById(userAssets[i].UserId));
+                var userAssetDto = new ShowUserAssetsOwnershipDto();
+
+                userAssetDto.Assets = _mapper.Map<ICollection<ShowUserAssetDto>>(userAssets[i].Assets);
+                userAssetDto.User = _mapper.Map<ShowUserDto>(_userRepository.GetUserById(userAssets[i].UserId));
+
+                userAssetsDto.Add(userAssetDto);
             }
 
             return Ok(userAssetsDto);
@@ -103,7 +107,8 @@ namespace EquipmentInventoryAPI.Controllers
             userOwnershipInfo.Assets.Add(userAsset);
             _userOwnershipRepository.AddUserAssetOwnership(userOwnershipInfo);
 
-            var userAssetsOwnershipDto = _mapper.Map<ShowUserAssetsOwnershipDto>(userOwnershipInfo);
+            var userAssetsOwnershipDto = new ShowUserAssetsOwnershipDto();
+            userAssetsOwnershipDto.User = _mapper.Map<ShowUserDto>(_userRepository.GetUserById(userOwnershipInfo.UserId));
             userAssetsOwnershipDto.Assets = _mapper.Map<ICollection<ShowUserAssetDto>>(userOwnershipInfo.Assets);
 
             return CreatedAtAction("GetUserAssetsOwnershipByUserId", new { id = addUserAsset.UserId }, userAssetsOwnershipDto);
@@ -116,19 +121,17 @@ namespace EquipmentInventoryAPI.Controllers
             if (Guid.Parse(id) != disposeUserAsset.UserId || !ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (!_userOwnershipRepository.CheckIfUserAssetOwnershipExist(disposeUserAsset.UserId))
+            var userAssetsOwnership = _userOwnershipRepository.GetUserAssetOwnershipByUserId(disposeUserAsset.UserId);
+
+            if (userAssetsOwnership == null)
             {
                 return NotFound();
             }
             else
             {
-                var updatedAssetOwnership = new UserAssetsOwnership()
-                {
-                    UserId = disposeUserAsset.UserId
-                };
-                updatedAssetOwnership.Assets.Where(x => x.Id == disposeUserAsset.AssetId).FirstOrDefault().DisposalDate = DateTimeOffset.UtcNow;
+                userAssetsOwnership.Assets.Where(x => x.Id == disposeUserAsset.UserAssetId).FirstOrDefault().DisposalDate = DateTimeOffset.UtcNow;
 
-                _userOwnershipRepository.UpdateUserAssetOwnership(updatedAssetOwnership);
+                _userOwnershipRepository.UpdateUserAssetOwnership(userAssetsOwnership);
             }
 
             return NoContent();

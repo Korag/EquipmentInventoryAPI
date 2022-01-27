@@ -51,7 +51,7 @@ namespace EquipmentInventoryAPI.Controllers
 
         // POST: api/User
         [HttpPost]
-        public async Task<ActionResult<ShowAssetDto>> PostUser(AddUserDto user)
+        public async Task<ActionResult<ShowUserDto>> PostUser(AddUserDto user)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -60,7 +60,7 @@ namespace EquipmentInventoryAPI.Controllers
             newUser.Id = Guid.NewGuid();
 
             _userRepository.AddUser(newUser);
-            var userDto = _mapper.Map<ShowAssetDto>(newUser);
+            var userDto = _mapper.Map<ShowUserDto>(newUser);
 
             return CreatedAtAction("GetUser", new { id = userDto.Id }, userDto);
         }

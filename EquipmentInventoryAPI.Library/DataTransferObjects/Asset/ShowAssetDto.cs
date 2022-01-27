@@ -15,6 +15,8 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
 
         public AssetType Type { get; set; }
 
+        public DateTimeOffset PurchaseDate { get; set; }
+
         public ICollection<Guid> Owners { get; set; }
 
         public ShowAssetDto()

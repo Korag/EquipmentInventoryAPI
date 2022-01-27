@@ -7,5 +7,10 @@ namespace EquipmentInventoryAPI.Library.DataTransferObjects
         public ShowUserDto User { get; set; }
 
         public ICollection<ShowUserAssetDto> Assets { get; set; }
+
+        public ShowUserAssetsOwnershipDto()
+        {
+            this.Assets = new List<ShowUserAssetDto>();
+        }
     }
 }
