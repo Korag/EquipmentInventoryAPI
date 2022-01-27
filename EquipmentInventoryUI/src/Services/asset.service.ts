@@ -21,4 +21,15 @@ export class AssetService {
 
     return await createdAsset;
   }
+
+  public async getAssets(): Promise<Array<Asset>> {
+    var assets = new Array<Asset>();
+
+    await this.http.get<Array<Asset>>(`${environment.apiUrl}/Asset`, {})
+      .pipe(map(result => {
+        assets = result;
+      })).toPromise();
+
+    return await assets;
+  }
 }

@@ -8,8 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddAssetModalComponent } from './add-asset-modal/add-asset-modal.component';
-import { OwnershipQueryComponent } from './ownership-query/ownership-query.component';
-import { UserOwnershipListComponent } from './user-ownership-list/user-ownership-list.component';
 import { AssetsListComponent } from './assets-list/assets-list.component';
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
@@ -20,8 +18,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
   declarations: [
     AppComponent,
     AddAssetModalComponent,
-    OwnershipQueryComponent,
-    UserOwnershipListComponent,
     AssetsListComponent
   ],
   imports: [

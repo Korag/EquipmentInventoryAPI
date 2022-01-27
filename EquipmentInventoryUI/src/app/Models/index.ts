@@ -6,6 +6,9 @@ export * from "./addUserAsset"
 export * from "./AddUserAssetOwnership"
 export * from "./userAssetOwnership"
 export * from "./userAsset"
+export * from "./userMinimal"
+export * from "./showAsset"
+
 
 
 

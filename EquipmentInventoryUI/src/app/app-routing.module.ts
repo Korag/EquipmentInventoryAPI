@@ -10,14 +10,6 @@ const routes: Routes = [
     path: 'assets',
     component: AssetsListComponent
   },
-  {
-    path: 'ownership',
-    component: UserOwnershipListComponent
-  },
-  {
-    path: 'ownershipQuery',
-    component: OwnershipQueryComponent
-  },
 
   {
     path: '**',
