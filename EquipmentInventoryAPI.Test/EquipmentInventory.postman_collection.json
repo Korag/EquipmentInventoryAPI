@@ -1,0 +1,883 @@
+{
+	"info": {
+		"_postman_id": "2b1360f7-4be8-470d-8142-8bb8cfa6ef84",
+		"name": "EquipmentInventory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/Asset",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44355/api/Asset",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"Asset"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44355/api/Asset",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"Asset"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:25:21 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"c579968b-4e44-40ac-a948-2abe3aefc054\",\n        \"serialNumber\": \"ZXCZVGASG218\",\n        \"name\": \"Test notebook\",\n        \"purchasePrice\": 3500,\n        \"presentPrice\": 3200,\n        \"type\": 0,\n        \"purchaseDate\": \"2013-11-10T14:25:12.5998095+00:00\",\n        \"owners\": [\n            \"c579968b-4e44-40ac-a948-2abe3aefc224\"\n        ]\n    },\n    {\n        \"id\": \"c379968b-4e44-40ac-a948-2abe3aefc054\",\n        \"serialNumber\": \"ZXCZVGAZG218\",\n        \"name\": \"Test notebook 2\",\n        \"purchasePrice\": 5500,\n        \"presentPrice\": 4200,\n        \"type\": 1,\n        \"purchaseDate\": \"2016-08-06T14:25:12.6002715+00:00\",\n        \"owners\": [\n            \"c979968b-4e44-40ac-a948-2abe3aefc224\"\n        ]\n    },\n    {\n        \"id\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\n        \"serialNumber\": \"DGHASJGDJA\",\n        \"name\": \"Test notebook 3\",\n        \"purchasePrice\": 2800,\n        \"presentPrice\": 800,\n        \"type\": 2,\n        \"purchaseDate\": \"2016-08-06T14:25:12.6002742+00:00\",\n        \"owners\": [\n            \"c579968b-4e44-40ac-a948-2abe3aefc224\",\n            \"c979968b-4e44-40ac-a948-2abe3aefc224\"\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "/api/Asset/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44355/api/Asset/c379968b-4e44-40ac-a948-2abe3aefc054",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"Asset",
+						"c379968b-4e44-40ac-a948-2abe3aefc054"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44355/api/Asset/c379968b-4e44-40ac-a948-2abe3aefc054",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"Asset",
+								"c379968b-4e44-40ac-a948-2abe3aefc054"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:26:19 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "251"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"c379968b-4e44-40ac-a948-2abe3aefc054\",\n    \"serialNumber\": \"ZXCZVGAZG218\",\n    \"name\": \"Test notebook 2\",\n    \"purchasePrice\": 5500,\n    \"presentPrice\": 4200,\n    \"type\": 1,\n    \"purchaseDate\": \"2016-08-06T14:25:12.6002715+00:00\",\n    \"owners\": [\n        \"c979968b-4e44-40ac-a948-2abe3aefc224\"\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "/api/Asset/User/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44355/api/Asset/User/c579968b-4e44-40ac-a948-2abe3aefc224",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"Asset",
+						"User",
+						"c579968b-4e44-40ac-a948-2abe3aefc224"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44355/api/Asset/User/c579968b-4e44-40ac-a948-2abe3aefc224",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"Asset",
+								"User",
+								"c579968b-4e44-40ac-a948-2abe3aefc224"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:27:04 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"c579968b-4e44-40ac-a948-2abe3aefc054\",\n        \"serialNumber\": \"ZXCZVGASG218\",\n        \"name\": \"Test notebook\",\n        \"purchasePrice\": 3500,\n        \"presentPrice\": 3200,\n        \"type\": 0,\n        \"purchaseDate\": \"2013-11-10T14:25:12.5998095+00:00\",\n        \"owners\": [\n            \"c579968b-4e44-40ac-a948-2abe3aefc224\"\n        ]\n    },\n    {\n        \"id\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\n        \"serialNumber\": \"DGHASJGDJA\",\n        \"name\": \"Test notebook 3\",\n        \"purchasePrice\": 2800,\n        \"presentPrice\": 800,\n        \"type\": 2,\n        \"purchaseDate\": \"2016-08-06T14:25:12.6002742+00:00\",\n        \"owners\": [\n            \"c579968b-4e44-40ac-a948-2abe3aefc224\",\n            \"c979968b-4e44-40ac-a948-2abe3aefc224\"\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "/api/Asset",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44355/api/Asset/c379968b-4e44-40ac-a948-2abe3aefc054",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"Asset",
+						"c379968b-4e44-40ac-a948-2abe3aefc054"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/api/Asset",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44355/api/Asset/c379968b-4e44-40ac-a948-2abe3aefc054",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"Asset",
+								"c379968b-4e44-40ac-a948-2abe3aefc054"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:30:46 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "api/Asset",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"serialNumber\": \"string\",\r\n  \"name\": \"string\",\r\n  \"purchasePrice\": 0,\r\n  \"presentPrice\": 0,\r\n  \"type\": 0,\r\n  \"purchaseDate\": \"2022-01-27T14:33:08.628Z\",\r\n  \"owners\": [\r\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44355/api/Asset",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"Asset"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"serialNumber\": \"string\",\r\n  \"name\": \"string\",\r\n  \"purchasePrice\": 0,\r\n  \"presentPrice\": 0,\r\n  \"type\": 0,\r\n  \"purchaseDate\": \"2022-01-27T14:33:08.628Z\",\r\n  \"owners\": [\r\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44355/api/Asset",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"Asset"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Location",
+							"value": "https://localhost:44355/api/Asset/2f9d6562-4f40-4d33-a189-0d21ae019bd3"
+						},
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:34:02 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"2f9d6562-4f40-4d33-a189-0d21ae019bd3\",\n    \"serialNumber\": \"string\",\n    \"name\": \"string\",\n    \"purchasePrice\": 0,\n    \"presentPrice\": 0,\n    \"type\": 0,\n    \"purchaseDate\": \"2022-01-27T14:33:08.628+00:00\",\n    \"owners\": [\n        \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "/api/Asset/{id}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\r\n    \"serialNumber\": \"DGHASJGDJA\",\r\n    \"name\": \"Test notebook 3\",\r\n    \"purchasePrice\": 2800,\r\n    \"presentPrice\": 800,\r\n    \"type\": 3,\r\n    \"purchaseDate\": \"2016-08-06T14:30:45.9177243+00:00\",\r\n    \"owners\": [\r\n      \"c579968b-4e44-40ac-a948-2abe3aefc224\"\r\n    ]\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44355/api/Asset/c179968b-4e44-40ac-a948-2abe3aefc054",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"Asset",
+						"c179968b-4e44-40ac-a948-2abe3aefc054"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/api/Asset/{id}",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\r\n    \"serialNumber\": \"DGHASJGDJA\",\r\n    \"name\": \"Test notebook 3\",\r\n    \"purchasePrice\": 2800,\r\n    \"presentPrice\": 800,\r\n    \"type\": 3,\r\n    \"purchaseDate\": \"2016-08-06T14:30:45.9177243+00:00\",\r\n    \"owners\": [\r\n      \"c579968b-4e44-40ac-a948-2abe3aefc224\"\r\n    ]\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44355/api/Asset/c179968b-4e44-40ac-a948-2abe3aefc054",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"Asset",
+								"c179968b-4e44-40ac-a948-2abe3aefc054"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:36:17 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "/api/UserAssetOwnership",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44355/api/UserAssetOwnership",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"UserAssetOwnership"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/api/UserAssetOwnership",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44355/api/UserAssetOwnership",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"UserAssetOwnership"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:37:30 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"user\": {\n            \"id\": \"c579968b-4e44-40ac-a948-2abe3aefc224\",\n            \"firstName\": \"Test\",\n            \"lastName\": \"User\",\n            \"emailAddress\": \"test.user@email.com\",\n            \"contactPhone\": \"123456789\"\n        },\n        \"assets\": [\n            {\n                \"id\": \"bacdfc6c-21ac-43e2-95e9-51d2c31ecb99\",\n                \"assetId\": \"c579968b-4e44-40ac-a948-2abe3aefc054\",\n                \"aquireDate\": \"2015-03-25T14:30:45.9181756+00:00\",\n                \"disposalDate\": null\n            },\n            {\n                \"id\": \"c344d15c-aad3-4f56-891b-1f756d09c617\",\n                \"assetId\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\n                \"aquireDate\": \"2016-08-06T14:30:45.9182465+00:00\",\n                \"disposalDate\": null\n            },\n            {\n                \"id\": \"72410bea-2391-4541-9fe9-5336c87c1570\",\n                \"assetId\": \"c379968b-4e44-40ac-a948-2abe3aefc054\",\n                \"aquireDate\": \"2016-08-06T14:30:45.9182476+00:00\",\n                \"disposalDate\": \"2017-02-22T14:30:45.9182479+00:00\"\n            }\n        ]\n    },\n    {\n        \"user\": {\n            \"id\": \"c979968b-4e44-40ac-a948-2abe3aefc224\",\n            \"firstName\": \"Super\",\n            \"lastName\": \"User\",\n            \"emailAddress\": \"super.user@email.com\",\n            \"contactPhone\": \"987654321\"\n        },\n        \"assets\": [\n            {\n                \"id\": \"6b4c9183-c916-4e17-99a0-72ba73333e06\",\n                \"assetId\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\n                \"aquireDate\": \"2016-08-06T14:30:45.9182933+00:00\",\n                \"disposalDate\": null\n            },\n            {\n                \"id\": \"e0be1d2d-1790-420f-81ce-96b494503683\",\n                \"assetId\": \"c379968b-4e44-40ac-a948-2abe3aefc054\",\n                \"aquireDate\": \"2019-05-03T14:30:45.9182953+00:00\",\n                \"disposalDate\": null\n            }\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "/api/UserAssetOwnership/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44355/api/UserAssetOwnership/c579968b-4e44-40ac-a948-2abe3aefc224",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"UserAssetOwnership",
+						"c579968b-4e44-40ac-a948-2abe3aefc224"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/api/UserAssetOwnership/{id}",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44355/api/UserAssetOwnership/c579968b-4e44-40ac-a948-2abe3aefc224",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"UserAssetOwnership",
+								"c579968b-4e44-40ac-a948-2abe3aefc224"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:38:41 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "689"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": \"c579968b-4e44-40ac-a948-2abe3aefc224\",\n        \"firstName\": \"Test\",\n        \"lastName\": \"User\",\n        \"emailAddress\": \"test.user@email.com\",\n        \"contactPhone\": \"123456789\"\n    },\n    \"assets\": [\n        {\n            \"id\": \"bacdfc6c-21ac-43e2-95e9-51d2c31ecb99\",\n            \"assetId\": \"c579968b-4e44-40ac-a948-2abe3aefc054\",\n            \"aquireDate\": \"2015-03-25T14:30:45.9181756+00:00\",\n            \"disposalDate\": null\n        },\n        {\n            \"id\": \"c344d15c-aad3-4f56-891b-1f756d09c617\",\n            \"assetId\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\n            \"aquireDate\": \"2016-08-06T14:30:45.9182465+00:00\",\n            \"disposalDate\": null\n        },\n        {\n            \"id\": \"72410bea-2391-4541-9fe9-5336c87c1570\",\n            \"assetId\": \"c379968b-4e44-40ac-a948-2abe3aefc054\",\n            \"aquireDate\": \"2016-08-06T14:30:45.9182476+00:00\",\n            \"disposalDate\": \"2017-02-22T14:30:45.9182479+00:00\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "/api/UserAssetOwnership/OwnedOver/{months}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44355/api/UserAssetOwnership/OwnedOver/36",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"UserAssetOwnership",
+						"OwnedOver",
+						"36"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/api/UserAssetOwnership/OwnedOver/{months}",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44355/api/UserAssetOwnership/OwnedOver/36",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"UserAssetOwnership",
+								"OwnedOver",
+								"36"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:53:15 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"user\": {\n            \"id\": \"c579968b-4e44-40ac-a948-2abe3aefc224\",\n            \"firstName\": \"Test\",\n            \"lastName\": \"User\",\n            \"emailAddress\": \"test.user@email.com\",\n            \"contactPhone\": \"123456789\"\n        },\n        \"assets\": [\n            {\n                \"id\": \"b92788cb-a162-4daf-b28a-9dc43d86834d\",\n                \"assetId\": \"c579968b-4e44-40ac-a948-2abe3aefc054\",\n                \"aquireDate\": \"2015-03-25T14:52:55.0282537+00:00\",\n                \"disposalDate\": null\n            },\n            {\n                \"id\": \"fda1f317-1e5e-4aa6-a562-d265513c479a\",\n                \"assetId\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\n                \"aquireDate\": \"2016-08-06T14:52:55.0283203+00:00\",\n                \"disposalDate\": null\n            }\n        ]\n    },\n    {\n        \"user\": {\n            \"id\": \"c979968b-4e44-40ac-a948-2abe3aefc224\",\n            \"firstName\": \"Super\",\n            \"lastName\": \"User\",\n            \"emailAddress\": \"super.user@email.com\",\n            \"contactPhone\": \"987654321\"\n        },\n        \"assets\": [\n            {\n                \"id\": \"6509c5eb-b66d-47d1-886d-91a3acaaa302\",\n                \"assetId\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\n                \"aquireDate\": \"2016-08-06T14:52:55.0283636+00:00\",\n                \"disposalDate\": null\n            }\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "/api/UserAssetOwnership/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44355/api/UserAssetOwnership/c579968b-4e44-40ac-a948-2abe3aefc224",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"UserAssetOwnership",
+						"c579968b-4e44-40ac-a948-2abe3aefc224"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/api/UserAssetOwnership/{id}",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44355/api/UserAssetOwnership/c579968b-4e44-40ac-a948-2abe3aefc224",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"UserAssetOwnership",
+								"c579968b-4e44-40ac-a948-2abe3aefc224"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:41:30 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "/api/UserAssetOwnership/Aquire",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"c579968b-4e44-40ac-a948-2abe3aefc224\",\r\n  \"asset\": {\r\n    \"assetId\": \"c379968b-4e44-40ac-a948-2abe3aefc054\",\r\n    \"aquireDate\": \"2022-01-27T14:42:18.374Z\",\r\n    \"disposalDate\": \"2022-01-27T14:42:18.374Z\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44355/api/UserAssetOwnership/Aquire",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"UserAssetOwnership",
+						"Aquire"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/api/UserAssetOwnership/Aquire",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"c579968b-4e44-40ac-a948-2abe3aefc224\",\r\n  \"asset\": {\r\n    \"assetId\": \"c379968b-4e44-40ac-a948-2abe3aefc054\",\r\n    \"aquireDate\": \"2022-01-27T14:42:18.374Z\",\r\n    \"disposalDate\": \"2022-01-27T14:42:18.374Z\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44355/api/UserAssetOwnership/Aquire",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"UserAssetOwnership",
+								"Aquire"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Location",
+							"value": "https://localhost:44355/api/UserAssetOwnership/c579968b-4e44-40ac-a948-2abe3aefc224"
+						},
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:44:12 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": \"c579968b-4e44-40ac-a948-2abe3aefc224\",\n        \"firstName\": \"Test\",\n        \"lastName\": \"User\",\n        \"emailAddress\": \"test.user@email.com\",\n        \"contactPhone\": \"123456789\"\n    },\n    \"assets\": [\n        {\n            \"id\": \"e604384d-488c-40a2-a7c4-c29710f6dd2a\",\n            \"assetId\": \"c579968b-4e44-40ac-a948-2abe3aefc054\",\n            \"aquireDate\": \"2015-03-25T14:43:49.9298952+00:00\",\n            \"disposalDate\": null\n        },\n        {\n            \"id\": \"b0851270-1ad8-4e36-b4f7-6f21aaaf4020\",\n            \"assetId\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\n            \"aquireDate\": \"2016-08-06T14:43:49.9299642+00:00\",\n            \"disposalDate\": null\n        },\n        {\n            \"id\": \"68227917-d491-4cdf-a952-e90463981f99\",\n            \"assetId\": \"c379968b-4e44-40ac-a948-2abe3aefc054\",\n            \"aquireDate\": \"2016-08-06T14:43:49.9299653+00:00\",\n            \"disposalDate\": \"2017-02-22T14:43:49.9299655+00:00\"\n        },\n        {\n            \"id\": \"86079733-b634-4b0b-9fc6-049ded538b39\",\n            \"assetId\": \"c379968b-4e44-40ac-a948-2abe3aefc054\",\n            \"aquireDate\": \"2022-01-27T14:44:12.140955+00:00\",\n            \"disposalDate\": null\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "/api/UserAssetOwnership/{id}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"c979968b-4e44-40ac-a948-2abe3aefc224\",\r\n    \"assets\": [\r\n      {\r\n        \"id\": \"f8eb28cd-5901-4803-b95e-cd516b067330\",\r\n        \"assetId\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\r\n        \"aquireDate\": \"2016-08-06T14:49:05.8203024+00:00\",\r\n        \"disposalDate\": null\r\n      }\r\n    ]\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44355/api/UserAssetOwnership/c979968b-4e44-40ac-a948-2abe3aefc224",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44355",
+					"path": [
+						"api",
+						"UserAssetOwnership",
+						"c979968b-4e44-40ac-a948-2abe3aefc224"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/api/UserAssetOwnership/{id}",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"c979968b-4e44-40ac-a948-2abe3aefc224\",\r\n    \"assets\": [\r\n      {\r\n        \"id\": \"f8eb28cd-5901-4803-b95e-cd516b067330\",\r\n        \"assetId\": \"c179968b-4e44-40ac-a948-2abe3aefc054\",\r\n        \"aquireDate\": \"2016-08-06T14:49:05.8203024+00:00\",\r\n        \"disposalDate\": null\r\n      }\r\n    ]\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44355/api/UserAssetOwnership/c979968b-4e44-40ac-a948-2abe3aefc224",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44355",
+							"path": [
+								"api",
+								"UserAssetOwnership",
+								"c979968b-4e44-40ac-a948-2abe3aefc224"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Jan 2022 14:50:21 GMT"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
