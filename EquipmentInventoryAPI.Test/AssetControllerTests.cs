@@ -150,7 +150,7 @@ namespace EquipmentInventoryAPI.Test
         public void GetAssetsByUserId_ReturnAssetIfIdIsValid(string id)
         {
             //Arrange
-            var assetController = new AssetController(new AssetRepository(new InMemoryContext()), 
+            var assetController = new AssetController(new AssetRepository(new InMemoryContext()),
                                                         new UserAssetsOwnershipRepository(new InMemoryContext()), mapper);
 
             //Act

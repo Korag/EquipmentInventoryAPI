@@ -88,6 +88,7 @@ namespace EquipmentInventoryAPI.Controllers
                 return BadRequest(ModelState);
 
             var userAsset = _mapper.Map<UserAsset>(addUserAsset.Asset);
+            userAsset.Id = Guid.NewGuid();
             userAsset.AquireDate = DateTimeOffset.UtcNow;
             userAsset.DisposalDate = null;
 
@@ -151,7 +152,7 @@ namespace EquipmentInventoryAPI.Controllers
                     UserId = userAssetsOwnership.UserId
                 };
                 updatedAssetOwnership.Assets = _mapper.Map<ICollection<UserAsset>>(userAssetsOwnership.Assets);
-                
+
                 _userOwnershipRepository.UpdateUserAssetOwnership(updatedAssetOwnership);
             }
 

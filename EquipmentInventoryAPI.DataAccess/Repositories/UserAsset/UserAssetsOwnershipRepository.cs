@@ -41,13 +41,13 @@ namespace EquipmentInventoryAPI.DataAccess.Repositories
 
                 foreach (var asset in userAssets.Assets)
                 {
-                    if (asset.DisposalDate.HasValue && (asset.DisposalDate?.Subtract(asset.AquireDate).TotalDays) > months*30)
+                    if (asset.DisposalDate.HasValue && (asset.DisposalDate?.Subtract(asset.AquireDate).TotalDays) > months * 30)
                     {
                         singleUserAsset.Assets.Add(asset);
                     }
                 }
 
-                if (singleUserAsset.Assets.Count()!=0)
+                if (singleUserAsset.Assets.Count() != 0)
                 {
                     filteredUsersAssets.Add(singleUserAsset);
                 }
