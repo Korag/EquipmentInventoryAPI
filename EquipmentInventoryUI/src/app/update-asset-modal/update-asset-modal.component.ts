@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { AssetService, UserAssetService, UserService } from 'src/Services';
-import { Asset, AssetType, UpdateAsset, User } from '../Models';
+import { AddUserAsset, Asset, AssetType, UpdateAsset, User } from '../Models';
+import { AddUserAssetOwnership } from '../Models/addUserAssetOwnership';
 
 @Component({
   selector: 'app-update-asset-modal',
@@ -38,8 +39,6 @@ export class UpdateAssetModalComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   async ngOnInit(): Promise<void> {
-
-console.log(await this.asset);
 
     this.updateAssetForm = this.formBuilder.group({
       serialNumber: [{ value: this.asset.serialNumber, disabled: false }, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(100)])],
@@ -132,6 +131,36 @@ console.log(await this.asset);
       updatedAsset.purchaseDate = purchaseDateVar;
 
       await this.assetContext.updateAsset(this.asset.id, updatedAsset);
+
+      for (let index = 0; index < updatedAsset.owners.length; index++) {
+        
+        if(this.asset.owners?.includes(updatedAsset.owners[index])){
+          continue;
+        }
+        else if(!this.asset.owners?.includes(updatedAsset.owners[index])){
+            //Aquire
+
+            let newUserAssetOwnership = new AddUserAssetOwnership();
+            newUserAssetOwnership.userId = updatedAsset.owners[index];
+            newUserAssetOwnership.asset = new AddUserAsset();
+            newUserAssetOwnership.asset.assetId = updatedAsset.id;
+
+            await this.userAssetContext.createUserAssetOwnership(newUserAssetOwnership);
+        }
+      }
+
+      for (let index = 0; index < this.asset.owners!.length; index++) {
+
+        if(!updatedAsset.owners?.includes(this.asset.owners![index]))
+        {
+          //Dispose
+
+          let userOwnership = await this.userAssetContext.getUserAssetOwnershipById(this.asset.owners![index]);
+          var userAsset = userOwnership.assets.find(x => x.assetId === updatedAsset.id);
+
+          await this.userAssetContext.disposeUserAssetOwnership(this.asset.owners![index], userAsset!.id);
+        }
+      }
 
       this.updateAssetEvent.emit(updatedAsset);
       this.closeModal();
