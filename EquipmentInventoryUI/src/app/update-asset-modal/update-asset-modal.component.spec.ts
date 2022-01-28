@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OwnershipQueryComponent } from './ownership-query.component';
+import { UpdateAssetModalComponent } from './update-asset-modal.component';
 
-describe('OwnershipQueryComponent', () => {
-  let component: OwnershipQueryComponent;
-  let fixture: ComponentFixture<OwnershipQueryComponent>;
+describe('UpdateAssetModalComponent', () => {
+  let component: UpdateAssetModalComponent;
+  let fixture: ComponentFixture<UpdateAssetModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OwnershipQueryComponent ]
+      declarations: [ UpdateAssetModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OwnershipQueryComponent);
+    fixture = TestBed.createComponent(UpdateAssetModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

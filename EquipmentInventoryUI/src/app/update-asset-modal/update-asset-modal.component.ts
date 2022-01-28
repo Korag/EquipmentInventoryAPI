@@ -1,27 +1,25 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AssetService, UserAssetService, UserService } from 'src/Services';
-import { AddAsset, AddUserAsset, AssetType, User } from '../Models';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { AddUserAssetOwnership } from '../Models/addUserAssetOwnership';
+import { AssetService, UserAssetService, UserService } from 'src/Services';
+import { Asset, AssetType, UpdateAsset, User } from '../Models';
 
 @Component({
-  selector: 'app-add-asset-modal',
-  templateUrl: './add-asset-modal.component.html',
-  styleUrls: ['./add-asset-modal.component.css']
+  selector: 'app-update-asset-modal',
+  templateUrl: './update-asset-modal.component.html',
+  styleUrls: ['./update-asset-modal.component.css']
 })
-export class AddAssetModalComponent implements OnInit {
-  @Output() addAssetEvent = new EventEmitter<any>();
+export class UpdateAssetModalComponent implements OnInit {
+  @Input() asset!: Asset;
+  @Output() updateAssetEvent = new EventEmitter<Asset>();
 
-  createAssetForm!: FormGroup;
+  updateAssetForm!: FormGroup;
   loading = false;
   submitted = false;
 
   users!: Array<User>;
   assetTypes!: AssetType;
-
-  purchaseDate?: Date = new Date();
 
   dropdownListTypes: any;
   selectedItemType: any = [];
@@ -40,14 +38,17 @@ export class AddAssetModalComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   async ngOnInit(): Promise<void> {
-    this.createAssetForm = this.formBuilder.group({
-      serialNumber: [{ value: "", disabled: false }, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(100)])],
-      name: [{ value: "", disabled: false }, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(100)])],
-      purchasePrice: [{ value: "", disabled: false }, Validators.compose([Validators.required])],
-      presentPrice: [{ value: "", disabled: false }],
+
+console.log(await this.asset);
+
+    this.updateAssetForm = this.formBuilder.group({
+      serialNumber: [{ value: this.asset.serialNumber, disabled: false }, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(100)])],
+      name: [{ value: this.asset.name, disabled: false }, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(100)])],
+      purchasePrice: [{ value: this.asset.purchasePrice, disabled: false }, Validators.compose([Validators.required])],
+      presentPrice: [{ value: this.asset.presentPrice, disabled: false }],
 
       //datePicker
-      purchaseDate: [{ value: this.purchaseDate, disabled: false }, Validators.compose([Validators.required])],
+      purchaseDate: [{ value: this.asset.purchaseDate, disabled: false }, Validators.compose([Validators.required])],
     })
 
     this.users = await this.userContext.getUsers();
@@ -59,7 +60,8 @@ export class AddAssetModalComponent implements OnInit {
       { enum: AssetType.Keyboard.toString(), enum_value: AssetType[AssetType.Keyboard] },
       { enum: AssetType.Mouse.toString(), enum_value: AssetType[AssetType.Mouse] },
     ];
-    this.selectedItemType = [{ enum: AssetType.Notebook.toString(), enum_value: AssetType[AssetType.Notebook] }];
+
+    this.selectedItemType = [{ enum: this.asset.type.toString(), enum_value: this.asset.type.toString() }];
     this.dropdownSettingsTypes = {
       singleSelection: true,
       idField: 'enum',
@@ -76,6 +78,13 @@ export class AddAssetModalComponent implements OnInit {
       this.dropdownListUsers.push({ id: this.users[index].id, name: this.users[index].firstName + " " + this.users[index].lastName });
     }
 
+    this.selectedItemsUsers = []; 
+    for (let index = 0; index < this.asset.owners!.length; index++) {
+
+      let user = this.users.find(x => x.id === this.asset.owners![index]);
+      this.selectedItemsUsers.push({ id: user!.id, name: user!.firstName + " " + user!.lastName });
+    }
+
     this.dropdownSettingsUsers = {
       singleSelection: false,
       idField: 'id',
@@ -87,16 +96,16 @@ export class AddAssetModalComponent implements OnInit {
     };
   }
 
-  public get f() { return this.createAssetForm.controls; }
+  public get f() { return this.updateAssetForm.controls; }
 
   async closeModal() {
     this.activeModal.close();
   }
 
-  async createAsset() {
+  async updateAsset() {
     this.submitted = true;
 
-    if (this.createAssetForm.invalid) {
+    if (this.updateAssetForm.invalid) {
       return;
     }
 
@@ -106,36 +115,25 @@ export class AddAssetModalComponent implements OnInit {
       const purchaseDateVar = new Date(this.f.purchaseDate.value);
       purchaseDateVar.setSeconds(0, 0);
 
-      var newAsset = new AddAsset();
-      newAsset.serialNumber = this.f.serialNumber.value;
-      newAsset.name = this.f.name.value;
-      newAsset.purchasePrice = this.f.purchasePrice.value;
-      newAsset.presentPrice = this.f.presentPrice.value;
+      var updatedAsset = new UpdateAsset();
+      updatedAsset.id = this.asset.id;
+      updatedAsset.serialNumber = this.f.serialNumber.value;
+      updatedAsset.name = this.f.name.value;
+      updatedAsset.purchasePrice = this.f.purchasePrice.value;
+      updatedAsset.presentPrice = this.f.presentPrice.value;
      
-      newAsset.type = this.selectedItemType[0].enum;
-      newAsset.owners = [];
+      updatedAsset.type = this.selectedItemType[0].enum_value;
+      updatedAsset.owners = [];
 
       for (let index = 0; index < this.selectedItemsUsers.length; index++) {
-        newAsset.owners.push(this.selectedItemsUsers[index].id);
+        updatedAsset.owners.push(this.selectedItemsUsers[index].id);
       }
 
-      newAsset.purchaseDate = purchaseDateVar;
+      updatedAsset.purchaseDate = purchaseDateVar;
 
-      console.log(newAsset);
-      var createdAsset = await this.assetContext.createAsset(newAsset);
+      await this.assetContext.updateAsset(this.asset.id, updatedAsset);
 
-      for (let index = 0; index < newAsset.owners.length; index++) {
-        
-        var userAssetOwnership = new AddUserAssetOwnership();
-        userAssetOwnership.userId = newAsset.owners[index];
-        
-        userAssetOwnership.asset = new AddUserAsset();
-        userAssetOwnership.asset.assetId = createdAsset.id;
-
-        await this.userAssetContext.createUserAssetOwnership(userAssetOwnership);
-      }
-
-      this.addAssetEvent.emit();
+      this.updateAssetEvent.emit(updatedAsset);
       this.closeModal();
     } catch (err) {
     }

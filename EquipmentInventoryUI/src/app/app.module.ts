@@ -13,12 +13,14 @@ import { AssetsListComponent } from './assets-list/assets-list.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { UpdateAssetModalComponent } from './update-asset-modal/update-asset-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddAssetModalComponent,
-    AssetsListComponent
+    AssetsListComponent,
+    UpdateAssetModalComponent
   ],
   imports: [
     BrowserModule,

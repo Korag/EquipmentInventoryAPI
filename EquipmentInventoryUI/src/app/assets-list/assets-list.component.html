@@ -1,33 +1,40 @@
 <div class="table-responsive" style="font-size: 14px;">
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">SerialNumber</th>
-            <th scope="col">Name</th>
-            <th scope="col">PurchasePrice</th>
-            <th scope="col">PresentPrice</th>
-            <th scope="col">PurchaseDate</th>
-            <th scope="col">Type</th>
-            <th scope="col">Owners</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let asset of assets">
-            <th scope="row">{{ asset.id }}</th>
-            <td>{{ asset.serialNumber }}</td>
-            <td>{{ asset.name }}</td>
-            <td>{{ asset.purchasePrice }}</td>
-            <td>{{ asset.presentPrice }}</td>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">SerialNumber</th>
+                <th scope="col">Name</th>
+                <th scope="col">PurchasePrice</th>
+                <th scope="col">PresentPrice</th>
+                <th scope="col">PurchaseDate</th>
+                <th scope="col">Type</th>
+                <th scope="col">Owners</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let asset of assets">
+                <th scope="row">{{ asset.id }}</th>
+                <td>{{ asset.serialNumber }}</td>
+                <td>{{ asset.name }}</td>
+                <td>{{ asset.purchasePrice }}</td>
+                <td>{{ asset.presentPrice }}</td>
 
-            <td>{{ asset.purchaseDate | date: 'dd/MM/yyyy HH:mm' }}</td>
-            <td>{{ asset.type }}</td>
-            <td>
-                <ul *ngFor="let owner of asset.owners">
-                    <li>{{ owner.firstName + " " + owner.lastName }}</li>
-                </ul>
-            </td>
-        </tr>
-    </tbody>
-</table>
+                <td>{{ asset.purchaseDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ asset.type }}</td>
+                <td>
+                    <ul *ngFor="let owner of asset.owners">
+                        <li>{{ owner.firstName + " " + owner.lastName }}</li>
+                    </ul>
+                </td>
+                <td>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <button type="button" (click)="openUpdateAssetModal(asset.id)" class="btn btn-outline-warning btn-sm" style="margin-right:5px">U</button>
+                        <button type="button" (click)="deleteAsset(asset.id, asset.owners!)" class="btn btn-outline-danger btn-sm">X</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

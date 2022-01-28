@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AddUserAssetOwnership, UserAssetOwnership } from 'src/app/Models';
+import { UserAssetOwnership } from 'src/app/Models';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AddUserAssetOwnership } from 'src/app/Models/addUserAssetOwnership';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,10 @@ export class UserAssetService {
       })).toPromise();
 
     return await createdUserAssetsOwnership;
+  }
+
+  public async removeUserAsset(id: string): Promise<void> {
+ 
+    await this.http.delete(`${environment.apiUrl}/UserAssetOwnership/${id}`, {}).toPromise();
   }
 }
